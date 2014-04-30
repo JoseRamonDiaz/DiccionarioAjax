@@ -1,0 +1,23 @@
+<!Doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script>
+		function login(){
+			console.log("logeando...");
+		}
+	</script>
+</head>
+<body>
+	<h1>
+		Panel de administración
+	</h1>
+	<form action="#.php" onsubmit="login(); return false;">
+		<label for="usuario">Usuario: </label>
+		<input type="text" id="usuario">
+		<label for="pass">Contraseña: </label>
+		<input type="password" id="pass">
+		<input type="submit" value="Ingresar">
+	</form>
+</body>
+</html>
