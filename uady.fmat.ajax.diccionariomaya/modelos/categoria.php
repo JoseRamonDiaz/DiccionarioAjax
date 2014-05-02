@@ -1,7 +1,7 @@
 <?php
 
-require_once '../../idiorm/idiorm.php';
-require_once '../../paris/paris.php';
+require_once 'idiorm/idiorm.php';
+require_once 'paris/paris.php';
 
 class Categoria extends Model {
 

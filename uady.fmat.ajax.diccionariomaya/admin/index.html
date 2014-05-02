@@ -1,23 +1,124 @@
-<!Doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<script>
-		function login(){
-			console.log("logeando...");
-		}
-	</script>
-</head>
-<body>
-	<h1>
-		Panel de administración
-	</h1>
-	<form action="#.php" onsubmit="login(); return false;">
-		<label for="usuario">Usuario: </label>
-		<input type="text" id="usuario">
-		<label for="pass">Contraseña: </label>
-		<input type="password" id="pass">
-		<input type="submit" value="Ingresar">
-	</form>
-</body>
+    <head>
+        
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Login Administrador</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script type="text/javascript" src="../js/zxml.js"></script>
+    
+    <script type="text/javascript">
+        
+        function sendRequest() {
+            var oForm = document.forms[0];
+            var sBody = getRequestBody(oForm);
+        
+            var oXmlHttp = zXmlHttp.createRequest();
+            oXmlHttp.open("post", oForm.action, true);
+            oXmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            
+            oXmlHttp.onreadystatechange = function () {
+                if (oXmlHttp.readyState === 4) {
+                    if (oXmlHttp.status === 200) {
+                        saveResult(oXmlHttp.responseText);
+                    } else {
+                        saveResult("Un error a ocurrido: " + oXmlHttp.statusText);
+                    }
+                }            
+            };
+            oXmlHttp.send(sBody);        
+        }
+        
+        function getRequestBody(oForm) {
+            var aParams = new Array();
+            
+            for (var i=0 ; i < oForm.elements.length; i++) {
+                var sParam = encodeURIComponent(oForm.elements[i].name);
+                sParam += "=";
+                sParam += encodeURIComponent(oForm.elements[i].value);
+                aParams.push(sParam);
+            } 
+            
+            return aParams.join("&");        
+        }
+        
+        function saveResult(sMessage) {
+            
+            var divStatus = document.getElementById("divStatus");
+            if (sMessage === "exito") {
+                location.href="blank.html";
+            } else {
+                divStatus.innerHTML = sMessage;
+            }
+        }
+
+    </script>
+
+    <!-- styles -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+
+    </style>
+    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    </head>
+    
+    <body>
+        
+        <div class="container">
+            
+            <form class="form-signin" method="POST" action="validaUsuario.php" onsubmit="sendRequest(); return false;">    
+                <h2 class="form-signin-heading">Diccionario Maya</h2>
+                <h4 class="form-signin-heading">Administración</h4>
+                <input class="input-block-level" placeholder="Nombre de usuario" type="text" name="username" value="">
+                <input class="input-block-level" placeholder="Password" type="password" name="password" value="">
+                <div class="alert-danger" id="divStatus"></div>
+                <label class="checkbox">
+                    <input name="remember" type="checkbox" checked> Recordarme
+                </label>
+                <input class="btn btn-large btn-primary" type="submit" value="Ingresar" />
+
+        </div> <!-- /container -->
+
+
+    </body>
 </html>

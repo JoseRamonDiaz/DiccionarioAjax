@@ -1,4 +1,5 @@
 <?php
+header ('Content-type: text/html; charset=utf-8');
 
 require_once '../daos/daoCategoria.php';
 
@@ -57,7 +58,7 @@ if ($categoria_buscada_por_id!=false) {
 else 
 	echo "error en la búsqueda";
 
-
+//ejemplo de cómo listar todas las categorías
 $lista_categorias = obtenerTodasCategorias();
 
 foreach ($lista_categorias as $record) {
@@ -65,6 +66,5 @@ foreach ($lista_categorias as $record) {
   echo $record->nombre;
   echo $record->abreviatura;
 }
-
 
 ?>

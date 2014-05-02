@@ -1,5 +1,4 @@
-<?php
-header ('Content-type: text/html; charset=utf-8');
+﻿<?php
 
 require_once '../modelos/categoria.php';
 
@@ -19,7 +18,7 @@ function guardarCategoria($nombre, $abreviatura) {
 
   try{
 
-  	$categoria = Model::factory('Categoria')->create();
+    $categoria = Model::factory('Categoria')->create();
     $categoria->nombre = $nombre;
     $categoria->abreviatura = $abreviatura;
 

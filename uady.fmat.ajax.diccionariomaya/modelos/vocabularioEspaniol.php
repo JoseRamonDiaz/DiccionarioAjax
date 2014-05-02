@@ -1,5 +1,8 @@
 <?php
 
+require_once 'idiorm/idiorm.php';
+require_once 'paris/paris.php';
+
 class VocabularioEspaniol extends Model {
 
   public static $_table = 'espaniol';

@@ -33,4 +33,12 @@ function autenticar($username, $password) {
     
   }
 
+/**
+* Edita los datos del administrador
+*/
+
+
+
+
+
 ?>
