@@ -67,7 +67,7 @@
                         </li>
                         
                         <li>
-                            <a href="categoria.php"><i class="fa fa-wrench fa-fw"></i> Categoría</a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Categoría</a>
                         </li>
                         <li>
                             <a href="maya.php"><i class="fa fa-wrench fa-fw"></i> Palabra Maya</a>
@@ -90,9 +90,18 @@
                     <h1 class="page-header">Categoría</h1>
 
                     <?php
-
+                        require_once '../daos/daoCategoria.php';
                     
+                        //listar todas las categorías
+                        $lista_categorias = obtenerTodasCategorias();
 
+                        foreach ($lista_categorias as $record) {
+                            $id = $record->categoria_id;
+                            $nombre = $record->nombre;
+                            $abreviatura = $record->abreviatura;
+                            echo "<div id=".$id."><a href='#'>".$nombre." </a></div><br>";
+
+                        }
 
 
                     ?>
