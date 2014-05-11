@@ -11,11 +11,50 @@
     <!-- Core CSS - Include with every page -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
-
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
     <!-- Page-Level Plugin CSS - Blank -->
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="../css/sb-admin.css" rel="stylesheet">
+
+    <script type="text/javascript">
+
+   
+
+        function addCategory() {
+
+             $(".add").hide();
+
+            var formulario=document.createElement("form");
+
+            formulario.action = "/cgi-bin/some.cgi";
+            formulario.method = "POST";
+
+            //formulario.innerHTML="<input class='form-control'><p class='help-block'>Example block-level help text here.</p></div> <br/> Abreviatura <input type='text' name='abreviatura' value=''/> <br/> <button type='submit' class='btn btn-default'>Submit Button</button>";  
+
+            $('#addCategory').append(formulario);
+
+            $('#addCategory form').append("<div class='input-group'></div>");
+
+            $("#addCategory form .input-group").append("<span class='input-group-addon'>Nombre</span>");
+            $("#addCategory form .input-group").append("<input type='text' class='input-xlarge' placeholder='Username' size='30'>");
+            
+            $("#addCategory form").append('<br><input type="submit" id="btnGuardar" value="Añadir categoría" class="btn btn-primary"/>');
+            
+            $("#addCategory form").append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
+        }
+
+        function cancelar(){
+
+            $('form').remove();
+             $(".add").show();
+        }
+
+
+    </script>
 
 </head>
 
@@ -106,7 +145,10 @@
 
                     ?>
 
-                    <a href="#"><i class="fa fa-plus fa-fw"></i>Añadir Categoría</a>
+                    <div id="addCategory"></div>
+                    </br>
+                    <a href='javascript:addCategory();' class="add"><i class="fa fa-plus fa-fw"></i>Añadir Categoría</a>
+                         
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
