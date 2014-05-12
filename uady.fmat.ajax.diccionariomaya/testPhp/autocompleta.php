@@ -23,6 +23,7 @@
     //Inicio de envio
     //$arregloPalabras = ["Acuerdo", "Adaptador", "Adaptar", "Adecuar", "Ademan", "Adictivo", "Aditivo","$palabraParcial", "$tipoTraduccion"];
     echo json_encode($vectorRespuesta);
+    mysqli_close($link);
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
