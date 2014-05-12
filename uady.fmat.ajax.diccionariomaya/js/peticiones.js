@@ -3,6 +3,9 @@
  * and open the template in the editor.
  */
 $(function(){
+    var btn_buscar = $("#buscar");
+    btn_buscar.click(pideTraducciones);
+    
    $("#word").autocomplete({
     minLength: 2,
     source: palabraIncompleta,
@@ -22,6 +25,14 @@ function palabraIncompleta(request,response){
 function pideTraducciones(event, ui){
     $("#word").autocomplete("close");
     var palabra = ui.item.value;
+    var idioma = getIdioma();
+    var datos = {palabraATraducir: palabra, tipoTraduccion: idioma};
+    $.get("testPhp/traduce.php", datos, muestraRespuesta);
+}
+
+function pideTraducciones(){
+    $("#word").autocomplete("close");
+    var palabra = $("#word").val();
     var idioma = getIdioma();
     var datos = {palabraATraducir: palabra, tipoTraduccion: idioma};
     $.get("testPhp/traduce.php", datos, muestraRespuesta);
