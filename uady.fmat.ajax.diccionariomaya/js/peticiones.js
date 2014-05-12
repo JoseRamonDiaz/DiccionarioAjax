@@ -38,6 +38,14 @@ function pideTraducciones(){
     $.get("testPhp/traduce.php", datos, muestraRespuesta);
 }
 
+function pideTraduccionesXResultadoParecido(){
+    $("#word").autocomplete("close");
+    var palabra = $(this).text();
+    var idioma = getIdioma();
+    var datos = {palabraATraducir: palabra, tipoTraduccion: idioma};
+    $.get("testPhp/traduce.php", datos, muestraRespuesta);
+}
+
 function muestraRespuesta(respuesta){
     var respuestaConvertida = eval(respuesta);
     muestraTraducciones(respuestaConvertida[0]);
@@ -51,9 +59,17 @@ function muestraTraducciones(traducciones){
 function muestraResultadosParecidos(resultadosParecidos){
     var divResultadosParecidos = $("#resultadosParecidos");
     divResultadosParecidos.html("");
+    
     for(var i = 0; i < resultadosParecidos.length; i++){
-        divResultadosParecidos.append("<p>"+resultadosParecidos[i]+"</p><br>");
+        divResultadosParecidos.append("<li class='resultadoParecido'>"+resultadosParecidos[i]+"</li>");
     }
+    setEventosResultadosParecidos();
+}
+
+function setEventosResultadosParecidos(){
+    var parrafosResPare  = $("[class=resultadoParecido]");
+    parrafosResPare.click(pideTraduccionesXResultadoParecido);
+    //$(".resultadoParecido").click(pideTraduccionesXResultadoParecido(this.val()));
 }
 
 //Funciones privadas no las vean :D 
