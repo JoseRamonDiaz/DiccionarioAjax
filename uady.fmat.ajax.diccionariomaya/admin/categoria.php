@@ -62,10 +62,13 @@
         
         function guardarCategoria(){
             
-                var envio = $.post("agregarCategoria.php", $("#datos").serialize());
-        console.log(envio);        
-        envio.done(function(data){
-                            alert("Datos guardados con éxito:" + data);});
+            var envio = $.post("agregarCategoria.php", $("#datos").serialize());
+            envio.done(function(data){
+                alert(data);
+                location.href="categoria.php";
+            }).fail(function() {
+                alert("Ocurrió un error.");
+            });
             
             
         }

@@ -6,7 +6,7 @@
  */
 
 
-    header("Content-Type: text/plain");
+    header("Content-Type: text/html; charset=UTF-8");
     
     require_once '../daos/daoCategoria.php';
     
@@ -19,7 +19,9 @@
  
     // si la categoria se guardó ...
     if ($categoria != false) {
-        echo "Una nueva categor&iacute;a ha sido creada";
-    }    
+        echo "Una nueva categoria ha sido creada.";
+    } else {
+        echo "Error: No se guardaron los datos.";
+    }   
 
 ?>
