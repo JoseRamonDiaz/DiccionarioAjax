@@ -23,14 +23,26 @@ function autenticar($username, $password) {
     ->where_equal('username', $username)
     ->where_equal('password', $password)
     ->find_one();
-
+    session_start();
+    $_SESSION["usuario"] = $username;
+        
     return $administrador;
-
+    
   } catch (Exception $e) {
     
     return false;
   }
     
+  }
+  
+  function validarSesion(){
+      session_start();
+      if(!isset($_SESSION["usuario"])){
+          $destino = "Location:index.html";
+          header($destino);
+          exit();
+      }
+      
   }
 
 /**
