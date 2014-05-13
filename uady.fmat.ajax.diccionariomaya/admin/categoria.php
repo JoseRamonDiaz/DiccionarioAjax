@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Administración Diccionario Maya</title>
+    <title>Administraci&oacute;n Diccionario Maya</title>
 
     <!-- Core CSS - Include with every page -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -15,34 +15,41 @@
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     
-    <!-- Page-Level Plugin CSS - Blank -->
+    <!-- Gesti�n de categor�as -->
 
-    <!-- SB Admin CSS - Include with every page -->
+    <!-- Admin - Include with every page -->
     <link href="../css/sb-admin.css" rel="stylesheet">
 
     <script type="text/javascript">
 
-   
+        function crearFormulario() {
+            
+            $(".add").hide();
 
-        function addCategory() {
+            //var formulario=document.createElement("form");
 
-             $(".add").hide();
-
-            var formulario=document.createElement("form");
-
-            formulario.action = "/cgi-bin/some.cgi";
-            formulario.method = "POST";
-
+            //formulario.action = "agregarCategoria.php";
+            //formulario.method = "POST";
+            //formulario.enctype="application/x-www-form-urlencoded";
+            //formulario.onsubmit="guardarCategoria(); return false;";
+            //formulario.id = "datos";
+           
+            var formulario = "<form action='agregarCategoria.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='guardarCategoria(); return false;' id='datos'></form>";
             //formulario.innerHTML="<input class='form-control'><p class='help-block'>Example block-level help text here.</p></div> <br/> Abreviatura <input type='text' name='abreviatura' value=''/> <br/> <button type='submit' class='btn btn-default'>Submit Button</button>";  
 
             $('#addCategory').append(formulario);
 
-            $('#addCategory form').append("<div class='input-group'></div>");
+            $('#addCategory form').append("<div id='nombre' class='input-group'></div><br>");
 
-            $("#addCategory form .input-group").append("<span class='input-group-addon'>Nombre</span>");
-            $("#addCategory form .input-group").append("<input type='text' class='input-xlarge' placeholder='Username' size='30'>");
+            //$("#addCategory form #nombre").append("<span class='input-group-addon'>Nombre</span>");
+            $("#addCategory form #nombre").append("<input type='text' name='nombre' class='input-xlarge' placeholder='Nombre' size='30'>");
             
-            $("#addCategory form").append('<br><input type="submit" id="btnGuardar" value="Añadir categoría" class="btn btn-primary"/>');
+            $('#addCategory form').append("<div id='abrev' class='input-group'></div>");
+
+            //$("#addCategory form #abrev").append("<span class='input-group-addon'>Abreviatura</span>");
+            $("#addCategory form #abrev").append("<input type='text' name='abreviatura' class='input-xlarge' placeholder='Abreviatura' size='30'>");
+            
+            $("#addCategory form").append('<br><input type="submit" id="btnGuardar" value="A&ntilde;adir categor&iacute;a" class="btn btn-primary"/>');
             
             $("#addCategory form").append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
         }
@@ -50,7 +57,17 @@
         function cancelar(){
 
             $('form').remove();
-             $(".add").show();
+            $(".add").show();
+        }
+        
+        function guardarCategoria(){
+            
+                var envio = $.post("agregarCategoria.php", $("#datos").serialize());
+        console.log(envio);        
+        envio.done(function(data){
+                            alert("Datos guardados con �xito:" + data);});
+            
+            
         }
 
 
@@ -78,7 +95,7 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuraci�n</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="index.html"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
@@ -106,13 +123,13 @@
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Categoría</a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Categor&iacute;a</a>
                         </li>
                         <li>
                             <a href="maya.php"><i class="fa fa-wrench fa-fw"></i> Palabra Maya</a>
                         </li>
                         <li>
-                            <a href="espaniol.php"><i class="fa fa-wrench fa-fw"></i> Palabra Español</a>
+                            <a href="espaniol.php"><i class="fa fa-wrench fa-fw"></i> Palabra Espa&ntilde;ol</a>
                         </li>
                         
                     </ul>
@@ -126,28 +143,34 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Categoría</h1>
+                    <h1 class="page-header">Categor&iacute;a</h1>
 
                     <?php
-                        require_once '../daos/daoCategoria.php';
                     
-                        //listar todas las categorías
+                    $previous_encoding = mb_internal_encoding();
+                        require_once '../daos/daoCategoria.php';
+                        
+                        
+                        mb_internal_encoding('UTF-8');
+                    
+                        //listar todas las categor�as
                         $lista_categorias = obtenerTodasCategorias();
 
                         foreach ($lista_categorias as $record) {
                             $id = $record->categoria_id;
                             $nombre = $record->nombre;
                             $abreviatura = $record->abreviatura;
-                            echo "<div id=".$id."><a href='#'>".$nombre." </a></div><br>";
+                            echo "<div id='".$id."'><a href='#'>".$nombre."</a></div><br>";
 
                         }
-
+                        
+                        mb_internal_encoding($previous_encoding);
 
                     ?>
 
                     <div id="addCategory"></div>
-                    </br>
-                    <a href='javascript:addCategory();' class="add"><i class="fa fa-plus fa-fw"></i>Añadir Categoría</a>
+                    <br>
+                    <a href='javascript:crearFormulario();' class="add"><i class="fa fa-plus fa-fw"></i>A&ntilde;adir Categor&iacute;a</a>
                          
                 </div>
                 <!-- /.col-lg-12 -->
