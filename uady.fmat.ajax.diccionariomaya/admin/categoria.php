@@ -1,3 +1,8 @@
+<?php
+	//Con esto se valida que se haya iniciado sesion
+	include_once "../daos/daoAdministrador.php";
+	validarSesion();
+?>
 <!DOCTYPE html>
 <html>
 
