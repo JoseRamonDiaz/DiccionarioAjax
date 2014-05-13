@@ -17,33 +17,33 @@ ORM::configure('password', 'centenario');
 */
 function autenticar($username, $password) {
 
-  try{
-
-  	$administrador = Model::factory('Administrador')
-    ->where_equal('username', $username)
-    ->where_equal('password', $password)
-    ->find_one();
-    session_start();
-    $_SESSION["usuario"] = $username;
+    try{
+        $administrador = Model::factory('Administrador')
+        ->where_equal('username', $username)
+        ->where_equal('password', $password)
+        ->find_one();
         
-    return $administrador;
+        session_start();
+        $_SESSION["usuario"] = $username;
+        
+        return $administrador;
+        
+    } catch (Exception $e) {
     
-  } catch (Exception $e) {
+        return false;    
+    }
     
-    return false;
-  }
-    
-  }
+}
   
-  function validarSesion(){
-      session_start();
-      if(!isset($_SESSION["usuario"])){
-          $destino = "Location:index.html";
-          header($destino);
-          exit();
-      }
-      
-  }
+function validarSesion(){
+    session_start();
+    if(!isset($_SESSION["usuario"])){
+        $destino = "Location:index.html";
+        header($destino);
+        exit();
+    }
+    
+}
 
 /**
 * Edita los datos del administrador

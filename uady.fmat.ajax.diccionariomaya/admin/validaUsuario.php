@@ -13,7 +13,7 @@
     if ($usuario_valido != false) {
         $sInfo = "exito";
     }
-    else $sInfo = "Credenciales inv&acute;lidas";
+    else $sInfo = "Credenciales inv&aacute;lidas";
 
     echo $sInfo;
     

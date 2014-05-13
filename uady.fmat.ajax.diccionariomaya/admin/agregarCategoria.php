@@ -19,7 +19,8 @@
  
     // si la categoria se guardó ...
     if ($categoria != false) {
-        echo "Una nueva categoria ha sido creada.";
+        //echo "Una nueva categoria ha sido creada.";
+        echo json_encode( array( "id"=>$categoria->categoria_id, "nombre"=>$categoria->nombre,"abreviatura"=>$categoria->abreviatura) );
     } else {
         echo "Error: No se guardaron los datos.";
     }   

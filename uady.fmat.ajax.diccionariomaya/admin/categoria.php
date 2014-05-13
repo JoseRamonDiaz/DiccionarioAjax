@@ -69,15 +69,37 @@
             
             var envio = $.post("agregarCategoria.php", $("#datos").serialize());
             envio.done(function(data){
-                alert(data);
-                location.href="categoria.php";
-            }).fail(function() {
+
+                $('form').remove();
+                $(".add").show();
+         
+                var obj = jQuery.parseJSON( data );
+  
+                 $( "tbody" ).append("<tr id="+ obj.id+"></tr>");
+                 $( "#"+obj.id ).append("<td>"+ obj.nombre+"</td>");
+                 $( "#"+obj.id ).append("<td>"+ obj.abreviatura+"</td>");
+                 $( "#"+obj.id ).append("<td><a href='javascript:editarCategoria("+ obj.id+");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></td>");
+                 $( "#"+obj.id ).append("<td><a href='javascript:eliminarCategoria("+ obj.id+");' class='remove'><i class='fa fa-times fa-fw'></i></a></td>");
+            
+
+            },"json").fail(function() {
                 alert("Ocurrió un error.");
             });
-            
-            
+  
         }
-
+        
+        function eliminarCategoria(id){
+        
+            var envio = $.get("eliminarCategoria.php?id=" + id);
+            envio.done(function(data){
+                alert(data);
+                $('#'+id).remove();
+  
+            }).fail(function(){
+                alert("Ocurrió un error.");
+            });
+      
+        }
 
     </script>
 
@@ -152,29 +174,44 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Categor&iacute;a</h1>
+                    
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Abreviatura</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
                     <?php
                     
-                    $previous_encoding = mb_internal_encoding();
                         require_once '../daos/daoCategoria.php';
-                        
-                        
-                        mb_internal_encoding('UTF-8');
-                    
+
                         //listar todas las categorías
                         $lista_categorias = obtenerTodasCategorias();
-
+                                     
                         foreach ($lista_categorias as $record) {
                             $id = $record->categoria_id;
                             $nombre = $record->nombre;
                             $abreviatura = $record->abreviatura;
-                            echo "<div id='".$id."'><a href='#'>".$nombre."</a></div><br>";
-
-                        }
-                        
-                        mb_internal_encoding($previous_encoding);
+                            echo "<tr id=".$id.">";
+                            echo "<td>".$nombre."</td>";
+                            echo "<td>".$abreviatura."</td>";
+                            echo "<td><a href='javascript:editarCategoria(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></td>";
+                            echo "<td><a href='javascript:eliminarCategoria(".$id.");' class='remove'><i class='fa fa-times fa-fw'></i></a></td>";
+                            echo "</tr>";
+                        }                  
 
                     ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>    
 
                     <div id="addCategory"></div>
                     <br>
