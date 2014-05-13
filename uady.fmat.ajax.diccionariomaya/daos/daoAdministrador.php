@@ -22,9 +22,11 @@ function autenticar($username, $password) {
         ->where_equal('username', $username)
         ->where_equal('password', $password)
         ->find_one();
-        
+    
+    if($administrador){
         session_start();
         $_SESSION["usuario"] = $username;
+    }
         
         return $administrador;
         
