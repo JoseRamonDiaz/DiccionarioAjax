@@ -5,9 +5,9 @@
 
     $query = "";
     if ($tipoTraduccion == "esma") {
-        $query = "SELECT texto_espaniol FROM espaniol WHERE texto_espaniol LIKE '%$palabraParcial%'";
+        $query = "SELECT DISTINCT texto_espaniol FROM espaniol WHERE texto_espaniol LIKE '%$palabraParcial%'";
     } else {
-        $query = "SELECT texto_maya FROM maya WHERE texto_maya LIKE '%$palabraParcial%'";
+        $query = "SELECT DISTINCT texto_maya FROM maya WHERE texto_maya LIKE '%$palabraParcial%'";
     }
 
     $result = mysqli_query($link, $query);

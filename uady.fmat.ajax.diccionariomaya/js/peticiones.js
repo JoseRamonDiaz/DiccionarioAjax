@@ -4,7 +4,7 @@
  */
 $(function(){
     var btn_buscar = $("#buscar");
-    btn_buscar.click(pideTraducciones);
+    btn_buscar.click(pideTraduccionesXBoton);
     
    $("#word").autocomplete({
     minLength: 2,
@@ -30,7 +30,7 @@ function pideTraducciones(event, ui){
     $.get("testPhp/traduce.php", datos, muestraRespuesta);
 }
 
-function pideTraducciones(){
+function pideTraduccionesXBoton(){
     $("#word").autocomplete("close");
     var palabra = $("#word").val();
     var idioma = getIdioma();
