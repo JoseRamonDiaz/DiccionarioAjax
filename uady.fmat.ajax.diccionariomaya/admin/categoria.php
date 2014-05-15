@@ -29,7 +29,7 @@
 
         function crearFormulario() {
             
-            $(".add").hide();
+            $('.add').hide();
 
             //var formulario=document.createElement("form");
 
@@ -47,16 +47,16 @@
             $('#addCategory form').append("<div id='nombre' class='input-group'></div><br>");
 
             //$("#addCategory form #nombre").append("<span class='input-group-addon'>Nombre</span>");
-            $("#addCategory form #nombre").append("<input type='text' name='nombre' class='input-xlarge' placeholder='Nombre' size='30'>");
+            $('#addCategory form #nombre').append("<input type='text' name='nombre' class='input-xlarge' placeholder='Nombre' size='30'>");
             
             $('#addCategory form').append("<div id='abrev' class='input-group'></div>");
 
             //$("#addCategory form #abrev").append("<span class='input-group-addon'>Abreviatura</span>");
-            $("#addCategory form #abrev").append("<input type='text' name='abreviatura' class='input-xlarge' placeholder='Abreviatura' size='30'>");
+            $('#addCategory form #abrev').append("<input type='text' name='abreviatura' class='input-xlarge' placeholder='Abreviatura' size='30'>");
             
-            $("#addCategory form").append('<br><input type="submit" id="btnGuardar" value="A&ntilde;adir categor&iacute;a" class="btn btn-primary"/>');
+            $('#addCategory form').append('<br><input type="submit" id="btnGuardar" value="A&ntilde;adir categor&iacute;a" class="btn btn-primary"/>');
             
-            $("#addCategory form").append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
+            $('#addCategory form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
         }
 
         function cancelar(){
@@ -66,6 +66,8 @@
         }
         
         function guardarCategoria(){
+            
+            $('#btnGuardar').attr('disabled', 'true');
             
             var envio = $.post("agregarCategoria.php", $("#datos").serialize());
             envio.done(function(data){
@@ -78,27 +80,99 @@
                  $( "tbody" ).append("<tr id="+ obj.id+"></tr>");
                  $( "#"+obj.id ).append("<td>"+ obj.nombre+"</td>");
                  $( "#"+obj.id ).append("<td>"+ obj.abreviatura+"</td>");
-                 $( "#"+obj.id ).append("<td><a href='javascript:editarCategoria("+ obj.id+");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></td>");
+                 $( "#"+obj.id ).append("<td><a href='javascript:crearFormEdicionCategoria("+ obj.id+");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></td>");
                  $( "#"+obj.id ).append("<td><a href='javascript:eliminarCategoria("+ obj.id+");' class='remove'><i class='fa fa-times fa-fw'></i></a></td>");
             
 
             },"json").fail(function() {
                 alert("Ocurrió un error.");
             });
+            
   
         }
+
         
-        function eliminarCategoria(id){
-        
+          function eliminarCategoria(id){
+            
+            $('a').bind('click', false);
+            
             var envio = $.get("eliminarCategoria.php?id=" + id);
             envio.done(function(data){
-                alert(data);
-                $('#'+id).remove();
+                
+                if (data){
+                    alert("Se ha eliminado la categoria.");
+                    $('#'+id).remove();
+                    $('a').unbind('click', false);
+                } else {
+                    alert("No se pudo eliminar la categoria.");
+                    $('a').unbind('click', false);
+                }
   
             }).fail(function(){
                 alert("Ocurrió un error.");
+                $('a').unbind('click', false);
             });
+            
+
+        }
+        
+        function crearFormEdicionCategoria(id){
+            
+            $('a').bind('click', false);
+            var celda1 = $('#' + id).find('td:eq(0)').html();   
+            var celda2 = $('#' + id).find('td:eq(1)').html(); 
+        
+            $('#' + id).empty();
+            $('#' + id).append("<td id='tdedit'></td>");
       
+            var formulario = "<form action='editarCategoria.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='editarCategoria("+id+"); return false;' id='datos'></form>";
+            //formulario.innerHTML="<input class='form-control'><p class='help-block'>Example block-level help text here.</p></div> <br/> Abreviatura <input type='text' name='abreviatura' value=''/> <br/> <button type='submit' class='btn btn-default'>Submit Button</button>";  
+
+            $('#tdedit').append(formulario);
+
+            $('#tdedit form').append("<div id='nombre' class='input-group'></div><br>");
+            
+            
+            $('#tdedit form').append("<input type='hidden' name='id' value='"+id+"'>");
+            //$("#addCategory form #nombre").append("<span class='input-group-addon'>Nombre</span>");
+            $('#tdedit form #nombre').append("<input type='text' name='nombre' class='input-xlarge' value='"+celda1+"' size='30'>");
+            
+            $('#tdedit form').append("<div id='abrev' class='input-group'></div>");
+
+            //$("#addCategory form #abrev").append("<span class='input-group-addon'>Abreviatura</span>");
+            $('#tdedit form #abrev').append("<input type='text' name='abreviatura' class='input-xlarge' value='"+celda2+"' size='30'>");
+            
+            $('#tdedit form').append('<br><input type="submit" id="btnEditar" value="Guardar categor&iacute;a" class="btn btn-primary"/>');
+            
+            //$('#tdedit form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
+            
+            
+        }
+        
+        function editarCategoria(id){
+            
+            $('#btnEditar').attr('disabled', 'true');
+            var envio = $.post("editarCategoria.php", $("#datos").serialize());
+            envio.done(function(data){
+
+                $('#tdedit').remove();
+
+                var obj = jQuery.parseJSON( data );
+                
+                 //alert(obj.nombre);
+                 //$( "tbody" ).append("<tr id="+ obj.id+"></tr>");
+                 $( "#"+obj.id ).append("<td>"+ obj.nombre+"</td>");
+                 $( "#"+obj.id ).append("<td>"+ obj.abreviatura+"</td>");
+                 $( "#"+obj.id ).append("<td><a href='javascript:crearFormEdicionCategoria("+ obj.id+");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></td>");
+                 $( "#"+obj.id ).append("<td><a href='javascript:eliminarCategoria("+ obj.id+")' class='remove'><i class='fa fa-times fa-fw'></i></a></td>");
+            
+
+            },"json").fail(function() {
+                alert("Ocurrió un error.");
+            });
+            
+            $('a').unbind('click', false);
+            
         }
 
     </script>
@@ -125,7 +199,7 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuraci&oacute;n</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="index.html"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
@@ -202,7 +276,7 @@
                             echo "<tr id=".$id.">";
                             echo "<td>".$nombre."</td>";
                             echo "<td>".$abreviatura."</td>";
-                            echo "<td><a href='javascript:editarCategoria(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></td>";
+                            echo "<td><a href='javascript:crearFormEdicionCategoria(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></td>";
                             echo "<td><a href='javascript:eliminarCategoria(".$id.");' class='remove'><i class='fa fa-times fa-fw'></i></a></td>";
                             echo "</tr>";
                         }                  

@@ -15,17 +15,20 @@
     //Buscar la categoria en la base de datos
     $categoria = obtenerCategoriaPorId($id_categoria);
 
-    // si la categoria existe se elimina
+    // si la categoria existe se intenta eliminar
     if ($categoria != false) {
         $resultado = eliminarCategoria($categoria);
         
         if ($resultado!=false){
-            echo "La categoria se ha eliminado.";
+            //Se eliminó
+            echo $resultado;
         } else {
-            echo "La categoria no se pudo eliminar.";
+            //"La categoria no se pudo eliminar.";
+            echo $resultado;
         }
     } else {
-        echo "Error: La categoria no existe en la base de datos.";
+        //"Error: La categoria no existe en la base de datos."
+        echo false;
     }
     
 ?>
