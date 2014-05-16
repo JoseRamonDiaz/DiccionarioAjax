@@ -23,12 +23,12 @@ function autenticar($username, $password) {
         ->where_equal('password', $password)
         ->find_one();
     
-       if($administrador){
-           session_start();
-           $_SESSION["usuario"] = $username;
-       }
+        if($administrador){
+            session_start();
+            $_SESSION["usuario"] = $username;
+        }
         
-        return $administrador;
+        return $administrador->id;
         
     } catch (Exception $e) {
     
@@ -44,15 +44,55 @@ function validarSesion(){
         header($destino);
         exit();
     }
+}
+
+/**
+* Localiza al usuario mediante email
+*/
+function findByEmail($email) {
+
+    try{
+        $administrador = Model::factory('Administrador')
+        ->where_equal('email', $email)
+        ->find_one();
+        
+        if ($administrador){
+            return $administrador->administrador_id;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+    
+        return false;    
+    }
     
 }
 
 /**
-* Edita los datos del administrador
+* Editar contraseña del administrador
 */
-
-
-
-
-
+function editarPerdil($id, $password){
+    
+    try{
+        $administrador = Model::factory('Administrador')
+        ->where_equal('administrador_id', $id)
+        ->find_one();
+        
+        if ($administrador){
+            $administrador-> password = $password;
+            $administrador-> save();
+        
+            return true;
+            
+        } else {
+            return false;
+        }
+        
+    } catch (Exception $e) {
+    
+        return false;    
+    }
+    
+    
+}
 ?>
