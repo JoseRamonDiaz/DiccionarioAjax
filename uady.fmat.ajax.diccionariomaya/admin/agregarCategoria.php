@@ -9,6 +9,8 @@
     header("Content-Type: text/html; charset=UTF-8");
     
     require_once '../daos/daoCategoria.php';
+    include_once "../daos/daoAdministrador.php";
+    validarSesion();
     
     //Capturar datos de la categoria nueva
     $nombreCategoria=$_POST["nombre"];

@@ -8,6 +8,8 @@
     header("Content-Type: text/html; charset=UTF-8");
     
     require_once '../daos/daoCategoria.php';
+    include_once "../daos/daoAdministrador.php";
+    validarSesion();
     
     //Capturar id de la categoria
     $id_categoria=$_POST["id"];
