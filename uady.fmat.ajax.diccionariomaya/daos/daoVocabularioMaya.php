@@ -1,10 +1,10 @@
 <?php
-
+include 'conexion.php';
 require_once '../modelos/vocabularioMaya.php';
 
-ORM::configure('mysql:host=localhost;dbname=diccionario');
-ORM::configure('username', 'root');
-ORM::configure('password', 'centenario');
+ORM::configure("mysql:host=$host;dbname=$database");
+ORM::configure('username', $user);
+ORM::configure('password', $password);
 
 function guardarVocabularioMaya($textoMaya, $rutaAudio, $categoriaId) {
     

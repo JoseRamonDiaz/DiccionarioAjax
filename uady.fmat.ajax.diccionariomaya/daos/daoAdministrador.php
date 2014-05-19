@@ -1,10 +1,10 @@
 <?php
-
+include 'conexion.php';
 require_once '../modelos/administrador.php';
 
-ORM::configure('mysql:host=localhost;dbname=diccionario');
-ORM::configure('username', 'root');
-ORM::configure('password', 'centenario');
+ORM::configure("mysql:host=$host;dbname=$database");
+ORM::configure('username', $user);
+ORM::configure('password', $password);
 
 /**
 * Valida las credenciales del administrador.
@@ -26,9 +26,10 @@ function autenticar($username, $password) {
         if($administrador){
             session_start();
             $_SESSION["usuario"] = $username;
+			return true;
         }
         
-        return $administrador->id;
+        return false;
         
     } catch (Exception $e) {
     
