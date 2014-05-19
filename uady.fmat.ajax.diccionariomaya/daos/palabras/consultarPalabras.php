@@ -1,5 +1,5 @@
 ﻿<?php
-	include 'conexion.php';
+	include '../conexion.php';
 
 	$idioma = $_GET['idioma'];
 	$numPalabras = $_GET['palabras'];

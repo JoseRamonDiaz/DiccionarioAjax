@@ -14,7 +14,7 @@
 					
 					if ($resultado){
 						$conexion = obtener_conexion();
-						$query = "UPDATE maya SET nombre_audio = '".$ruta.$archivo_audio['name']."' WHERE maya_id = $maya_id";
+						$query = "UPDATE maya SET nombre_audio = '".$archivo_audio['name']."' WHERE maya_id = $maya_id";
 				
 						if(!($result = mysqli_query($conexion, $query))){
 							$msg = "Error en la consulta: " . mysqli_error($conexion);
@@ -139,7 +139,7 @@
 	}
 	
 	function obtener_conexion(){
-		include 'conexion.php';
+		include '../conexion.php';
 		// Conectar a la BD.
 		$link = mysqli_connect($host, $user, $password, $database);
 	

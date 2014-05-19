@@ -1,5 +1,5 @@
 <?php
-	include 'conexion.php';
+	include '../conexion.php';
 	
 	$id_palabra = $_GET['id'];
 	$idioma = $_GET['idioma'];
@@ -25,7 +25,7 @@
 		$respuesta[0] =  $result;
 		$respuesta[1] = $id_palabra;
 		if(isset($_GET['nombre_audio']) && $_GET['nombre_audio'] != "null"){
-			unlink($_GET['nombre_audio']);
+			unlink("../../audio/".$_GET['nombre_audio']);
 		}
 	}
 	else{

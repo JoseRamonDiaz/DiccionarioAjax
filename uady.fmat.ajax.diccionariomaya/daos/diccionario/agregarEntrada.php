@@ -1,5 +1,5 @@
 ﻿<?php
-	include 'conexion.php';
+	include '../conexion.php';
 
 	$id_espaniol = $_GET['id_espaniol'];
 	$id_maya = $_GET['id_maya'];
