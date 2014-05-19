@@ -50,7 +50,7 @@
         }
         //Aqui se agregaria el audio
         if($tipoTraduccion == "esma"){
-            $respuesta .= "<audio controls='controls'><source src='$rutaAudio' type='audio/mpeg'>Tu navegador no permite reproducir el audio</audio>";
+            $respuesta .= "<audio controls='controls'><source src='audio/$rutaAudio' type='audio/mpeg'>Tu navegador no permite reproducir el audio</audio>";
             
         }
         mysqli_close($link);

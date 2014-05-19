@@ -121,9 +121,6 @@ function mostrarEdicion(respuesta){
 		}
 		else{
 			audio = palabra['nombre_audio'];
-			if(audio){
-				audio = palabra['nombre_audio'].split("/")[3];
-			}
 		
 			$("#form_editar #palabra").val(palabra['texto_maya']);
 			$("#form_editar #id_palabra").val(palabra['maya_id']);
