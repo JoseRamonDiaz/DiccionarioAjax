@@ -235,7 +235,9 @@
                         <li>
                             <a href="espaniol.php"><i class="fa fa-wrench fa-fw"></i> Palabra Espa&ntilde;ol</a>
                         </li>
-                        
+                        <li>
+                            <a href="diccionario.php"><i class="fa fa-wrench fa-fw"></i> Diccionario</a>
+                        </li>
                     </ul>
                     <!-- /#side-menu -->
                 </div>

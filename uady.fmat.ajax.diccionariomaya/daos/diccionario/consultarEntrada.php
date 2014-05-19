@@ -2,11 +2,9 @@
 	include 'conexion.php';
 
 	$idioma = $_GET['idioma'];
-	$numPalabras = $_GET['palabras'];
-	$pagina = $_GET['pagina'];
-	
-	$inicio = $pagina * $numPalabras;
-	$fin = $numPalabras + 1;
+	$palabra = $_GET['palabra'];
+
+	$orderby = "texto_maya";
 
     $link = mysqli_connect($host, $user, $password, $database);
 
@@ -16,11 +14,10 @@
 	}
 	
 	if ($idioma == "es") {    
-		$query = "SELECT nombre, espaniol_id, texto_espaniol FROM espaniol JOIN categoria ON (categoria.categoria_id = espaniol.categoria_id) ORDER BY texto_espaniol LIMIT $inicio, $fin";
+		$orderby = "texto_espaniol";
 	}
-	else{
-		$query = "SELECT nombre, maya_id, texto_maya, nombre_audio FROM maya JOIN categoria ON (categoria.categoria_id = maya.categoria_id) ORDER BY texto_maya LIMIT $inicio, $fin";
-	}
+	
+	$query = "SELECT nombre, espaniol.espaniol_id, texto_espaniol, maya.maya_id, texto_maya FROM espaniol JOIN categoria ON (categoria.categoria_id = espaniol.categoria_id) JOIN espaniol_maya ON ( espaniol.espaniol_id = espaniol_maya.espaniol_id ) JOIN maya ON ( maya.maya_id = espaniol_maya.maya_id ) WHERE $orderby = '$palabra'";
 	
 	$vectorRespuesta = array();
 	

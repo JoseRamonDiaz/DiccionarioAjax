@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	//Con esto se valida que se haya iniciado sesion
 	include_once "../daos/daoAdministrador.php";
 	validarSesion();
@@ -10,6 +10,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shorcut icon"  href="../style/diccionario.png" type="image/png">
 
     <title>Administraci&oacute;n Diccionario Maya</title>
 
@@ -17,71 +19,29 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+	
+	<link rel="stylesheet" type="text/css" href="../js/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.css">
     
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../js/jquery-1.10.2.js"></script>
+	<script src="../js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
 	<script src="../js/peticiones-admin.js"></script>
+	
+	    <!-- Core Scripts - Include with every page -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!-- Page-Level Plugin Scripts - Blank -->
+
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="../js/sb-admin.js"></script>
     
-    <!-- Gesti�n de categor�as -->
+    <!-- Gestión de palabras -->
 
     <!-- Admin - Include with every page -->
     <link href="../css/sb-admin.css" rel="stylesheet">
 
-    <script type="text/javascript">
-
-        function crearFormulario() {
-            
-            $(".add").hide();
-
-            //var formulario=document.createElement("form");
-
-            //formulario.action = "agregarCategoria.php";
-            //formulario.method = "POST";
-            //formulario.enctype="application/x-www-form-urlencoded";
-            //formulario.onsubmit="guardarCategoria(); return false;";
-            //formulario.id = "datos";
-           
-            var formulario = "<form action='agregarCategoria.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='guardarCategoria(); return false;' id='datos'></form>";
-            //formulario.innerHTML="<input class='form-control'><p class='help-block'>Example block-level help text here.</p></div> <br/> Abreviatura <input type='text' name='abreviatura' value=''/> <br/> <button type='submit' class='btn btn-default'>Submit Button</button>";  
-
-            $('#addCategory').append(formulario);
-
-            $('#addCategory form').append("<div id='nombre' class='input-group'></div><br>");
-
-            //$("#addCategory form #nombre").append("<span class='input-group-addon'>Nombre</span>");
-            $("#addCategory form #nombre").append("<input type='text' name='nombre' class='input-xlarge' placeholder='Nombre' size='30'>");
-            
-            $('#addCategory form').append("<div id='abrev' class='input-group'></div>");
-
-            //$("#addCategory form #abrev").append("<span class='input-group-addon'>Abreviatura</span>");
-            $("#addCategory form #abrev").append("<input type='text' name='abreviatura' class='input-xlarge' placeholder='Abreviatura' size='30'>");
-            
-            $("#addCategory form").append('<br><input type="submit" id="btnGuardar" value="A&ntilde;adir categor&iacute;a" class="btn btn-primary"/>');
-            
-            $("#addCategory form").append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
-        }
-
-        function cancelar(){
-
-            $('form').remove();
-            $(".add").show();
-        }
-        
-        function guardarCategoria(){
-            
-            var envio = $.post("agregarCategoria.php", $("#datos").serialize());
-            envio.done(function(data){
-                alert(data);
-                location.href="categoria.php";
-            }).fail(function() {
-                alert("Ocurri� un error.");
-            });
-            
-            
-        }
-
-
-    </script>
-
+	<script>setIdioma("ma");</script>
+	
 </head>
 
 <body>
@@ -104,7 +64,7 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuraci�n</a>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="index.html"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
@@ -140,7 +100,9 @@
                         <li>
                             <a href="espaniol.php"><i class="fa fa-wrench fa-fw"></i> Palabra Espa&ntilde;ol</a>
                         </li>
-                        
+						<li>
+                            <a href="diccionario.php"><i class="fa fa-wrench fa-fw"></i> Diccionario</a>
+                        </li>
                     </ul>
                     <!-- /#side-menu -->
                 </div>
@@ -154,15 +116,89 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">Palabras en maya</h1>
 
-					<input type="text" size="50" maxlength="50" class="inputText ui-autocomplete-input" height="40" width="60" name="word" id="word" autocomplete="off">
-	
-					<input id="buscar" name="Buscar" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="../style/search.png" alt="Search" title="Search">
+					<div id="admin_palabras">
+						<ul>
+							<li><a href="#mostrar_palabras"><i class="fa fa-list fa-fw"></i>Palabras</a></li>
+							<li><a href="#agregar_palabra"><i class="fa fa-plus fa-fw"></i>Añadir palabra</a></li>
+							<li><a href="#editar_palabra"><i class="fa fa-plus fa-fw"></i>Editar palabra</a></li>
+						</ul>
+						
+						<div id="mostrar_palabras">
+							<div id="busqueda">
+								<input type="text" size="50" maxlength="50" class="inputText ui-autocomplete-input" height="40" width="60" name="word" id="word" autocomplete="off">
+				
+								<input id="buscar" name="Buscar" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="../style/search.png" alt="Search" title="Search" onClick="consultarPalabra()">
+							</div>
+							</br>
+							
+							<table id="tablaDiccionario" class="table"></table>
+							
+							<div id="nav_bar"></div>
+						</div>
+						
+						<div id="agregar_palabra">
+							<form id="form_agregar">
+							<div style="margin:10px">
+								<select id="cmb_categoria" name="cmb_categoria">
+									<option value="-1" selected>Categoría</option>
+									<?php
+										require_once '../daos/daoCategoria.php';
+
+										//listar todas las categorías
+										$lista_categorias = obtenerTodasCategorias();
+									
+										foreach ($lista_categorias as $record) {	
+											echo "<option value=\"". $record->categoria_id ."\">". $record->nombre ."</option>";
+										}                  
+									?>
+								</select>
+							</div>
+								
+							<div style="margin:10px"><input type="text" name="palabrama" class="input-xlarge" placeholder="Palabra maya" size="30"></div>
+							
+							<input type="file" name="f_audio" id="f_audio" style="margin:10px">
+							
+							<input type="button" name="btn_guardar" id="btn_guardar" value="Guardar" style="margin:10px; padding:5px; position:relative; left:50px">
+							
+							<input type="hidden" name="txt_idioma" id="txt_idioma" value="ma">
+							</form>
+						</div>
+						
+						<div id="editar_palabra">
+							<form id="form_editar">
+							<div style="margin:10px">
+								<select id="cmb_categoria" name="cmb_categoria">
+									<option value="-1" selected>Categoría</option>
+									<?php
+										require_once '../daos/daoCategoria.php';
+
+										//listar todas las categorías
+										$lista_categorias = obtenerTodasCategorias();
+									
+										foreach ($lista_categorias as $record) {	
+											echo "<option value=\"". $record->categoria_id ."\">". $record->nombre ."</option>";
+										}                  
+									?>
+								</select>
+							</div>
+								
+							<div style="margin:10px"><input type="text" name="palabra" id="palabra" class="input-xlarge" placeholder="Palabra maya" size="30"></div>
+							
+							<div style="margin:10px"><input type="text" name="audio" id="audio" placeholder="Audio maya" size="40" readonly></div>
+							
+							<input type="file" name="f_audio" id="f_audio" style="margin:10px">
+							
+							<input type="button" name="btn_guardarEdicion" id="btn_guardarEdicion" value="Guardar" style="margin:10px; padding:5px; position:relative; left:50px">
+							<input type="button" name="btn_cancelarEdicion" id="btn_cancelarEdicion" value="Cancelar" style="margin:10px; padding:5px; position:relative; left:50px">
+							
+							<input type="hidden" name="txt_idioma" id="txt_idioma" value="ma">
+							<input type="hidden" name="id_palabra" id="id_palabra" value="0">
+							
+							</form>
+						</div>
+
+					</div>
 					
-					<table id="tablaDiccionario" class="table"></table>
-					
-					<script>setIdioma("ma"); consultarPalabras(0);</script>
-					
-					<div id="nav_bar"></div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -173,15 +209,7 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- Core Scripts - Include with every page -->
-    <script src="../js/jquery-1.10.2.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
-    <!-- Page-Level Plugin Scripts - Blank -->
-
-    <!-- SB Admin Scripts - Include with every page -->
-    <script src="../js/sb-admin.js"></script>
 
     <!-- Page-Level Demo Scripts - Blank - Use for reference -->
 

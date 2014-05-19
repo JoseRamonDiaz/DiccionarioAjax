@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `espaniol` (
 CREATE TABLE IF NOT EXISTS `espaniol_maya` (
   `espaniol_id` int(11) NOT NULL,
   `maya_id` int(11) NOT NULL,
+  PRIMARY KEY (`espaniol_id`,`maya_id`),
   KEY `espaniol_id` (`espaniol_id`,`maya_id`),
   KEY `maya_id` (`maya_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

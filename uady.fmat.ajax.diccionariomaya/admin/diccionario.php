@@ -23,7 +23,7 @@
 	<link rel="stylesheet" type="text/css" href="../js/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.css">
 	
     <script src="../js/jquery-1.10.2.js"></script>
-	<script src="../js/peticiones-admin.js"></script>
+	<script src="../js/admin-diccionario.js"></script>
 	<script src="../js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
 	
 
@@ -35,12 +35,11 @@
     <!-- SB Admin Scripts - Include with every page -->
     <script src="../js/sb-admin.js"></script>
     
-    <!-- Gestión de palabras en español-->
+    <!-- Gestión de diccionario-->
 
     <!-- Admin - Include with every page -->
     <link href="../css/sb-admin.css" rel="stylesheet">
 	
-	<script>setIdioma("es");</script>
 </head>
 
 <body>
@@ -100,9 +99,10 @@
                             <a href="espaniol.php"><i class="fa fa-wrench fa-fw"></i> Palabra Espa&ntilde;ol</a>
                         </li>
 						
-                        <li>
+						<li>
                             <a href="diccionario.php"><i class="fa fa-wrench fa-fw"></i> Diccionario</a>
                         </li>
+                        
                     </ul>
                     <!-- /#side-menu -->
                 </div>
@@ -114,21 +114,27 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Palabras en español</h1>	
+                    <h1 class="page-header">Diccionario</h1>	
 					
 					<div id="admin_palabras">
 						<ul>
-							<li><a href="#mostrar_palabras"><i class="fa fa-list fa-fw"></i>Palabras</a></li>
-							<li><a href="#agregar_palabra"><i class="fa fa-plus fa-fw"></i>Añadir palabra</a></li>
-							<li><a href="#editar_palabra"><i class="fa fa-plus fa-fw"></i>Editar palabra</a></li>
+							<li><a href="#mostrar_diccionario"><i class="fa fa-list fa-fw"></i>Diccionario</a></li>
+							<li><a href="#agregar_entrada"><i class="fa fa-plus fa-fw"></i>Añadir entrada</a></li>
 						</ul>
 						
-						<div id="mostrar_palabras">
+						<div id="mostrar_diccionario">
 							<div id="busqueda">
 								<input type="text" size="50" maxlength="50" class="inputText ui-autocomplete-input" height="40" width="60" name="word" id="word" autocomplete="off">
 				
-								<input id="buscar" name="Buscar" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="../style/search.png" alt="Search" title="Search" onClick="consultarPalabra()">
+								<input id="buscar" name="Buscar" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="../style/search.png" alt="Search" title="Search" onClick="consultarEntrada()">
 							</div>
+							</br>
+							
+							<select id="cmb_idioma" name="cmb_idioma" style="margin:15px">
+								<option value="es" selected>Español - Maya</option>
+								<option value="ma" >Maya - Español</option>
+							</select>
+							
 							</br>
 							
 							<table id="tablaDiccionario" class="table"></table>
@@ -136,58 +142,19 @@
 							<div id="nav_bar"></div>
 						</div>
 						
-						<div id="agregar_palabra">
+						<div id="agregar_entrada">
 							<form id="form_agregar">
-							<div style="margin:10px">
-								<select id="cmb_categoria" name="cmb_categoria">
-									<option value="-1" selected>Categoría</option>
-									<?php
-										require_once '../daos/daoCategoria.php';
-
-										//listar todas las categorías
-										$lista_categorias = obtenerTodasCategorias();
-									
-										foreach ($lista_categorias as $record) {	
-											echo "<option value=\"". $record->categoria_id ."\">". $record->nombre ."</option>";
-										}                  
-									?>
+							
+								<select id="sel_palabraes" style="margin:10px;">
+									<option value="-1" selected>Palabra español</option>
 								</select>
-							</div>
-							
-							<div style="margin:10px"><input type="text" name="palabraes" class="input-xlarge" placeholder="Palabra español" size="30"></div>
-							
-							<input type="button" name="btn_guardar" id="btn_guardar" value="Guardar" style="margin:10px; padding:5px; position:relative; left:50px">
-							
-							<input type="hidden" name="txt_idioma" id="txt_idioma" value="es">
-							</form>
-						</div>
-						
-						<div id="editar_palabra">
-							<form id="form_editar">
-							<div style="margin:10px">
-								<select id="cmb_categoria" name="cmb_categoria">
-									<option value="-1" selected>Categoría</option>
-									<?php
-										require_once '../daos/daoCategoria.php';
-
-										//listar todas las categorías
-										$lista_categorias = obtenerTodasCategorias();
-									
-										foreach ($lista_categorias as $record) {	
-											echo "<option value=\"". $record->categoria_id ."\">". $record->nombre ."</option>";
-										}                  
-									?>
+								
+								</br>
+								<select id="sel_palabrama" style="margin:10px;">
+									<option value="-1" selected>Palabra maya</option>
 								</select>
-							</div>
-							
-							<div style="margin:10px"><input type="text" name="palabra" id="palabra" class="input-xlarge" placeholder="Palabra español" size="30"></div>
-							
-							<input type="button" name="btn_guardarEdicion" id="btn_guardarEdicion" value="Guardar" style="margin:10px; padding:5px; position:relative; left:50px">
-							<input type="button" name="btn_cancelarEdicion" id="btn_cancelarEdicion" value="Cancelar" style="margin:10px; padding:5px; position:relative; left:50px">
-							
-							<input type="hidden" name="txt_idioma" id="txt_idioma" value="es">
-							<input type="hidden" name="id_palabra" id="id_palabra" value="0">
-							
+								</br>
+								<input type="button" name="btn_guardar" id="btn_guardar" value="Guardar" style="margin:10px; padding:5px; position:relative; left:50px">
 							</form>
 						</div>
 

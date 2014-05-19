@@ -1,31 +1,28 @@
-﻿<?php
+<?php
 	include 'conexion.php';
-
-	$idioma = $_GET['idioma'];
-	$numPalabras = $_GET['palabras'];
-	$pagina = $_GET['pagina'];
 	
-	$inicio = $pagina * $numPalabras;
-	$fin = $numPalabras + 1;
+	$id = $_GET['id'];
+	$idioma = $_GET['idioma'];
+	
 
     $link = mysqli_connect($host, $user, $password, $database);
-
+	
 	if (mysqli_connect_errno()) {
-		$msg = "Error en la conexión a la BD: ". mysqli_connect_error();
+		$msg = "Error en la conexi�n a la BD: ". mysqli_connect_error();
 		die( json_encode( array( false, $msg)));
 	}
+	$query="";
 	
-	if ($idioma == "es") {    
-		$query = "SELECT nombre, espaniol_id, texto_espaniol FROM espaniol JOIN categoria ON (categoria.categoria_id = espaniol.categoria_id) ORDER BY texto_espaniol LIMIT $inicio, $fin";
-	}
+	if ($idioma == "es") {
+		$query = "SELECT categoria_id, espaniol_id, texto_espaniol FROM espaniol WHERE espaniol_id = $id";
+    }
 	else{
-		$query = "SELECT nombre, maya_id, texto_maya, nombre_audio FROM maya JOIN categoria ON (categoria.categoria_id = maya.categoria_id) ORDER BY texto_maya LIMIT $inicio, $fin";
+		$query = "SELECT categoria_id, maya_id, texto_maya, nombre_audio FROM maya WHERE maya_id = $id";
 	}
 	
 	$vectorRespuesta = array();
 	
     if($result = mysqli_query($link, $query)){
-		
 		while ($resultado = mysqli_fetch_assoc($result)) {
 			$vectorRespuesta[] = $resultado;
 		}

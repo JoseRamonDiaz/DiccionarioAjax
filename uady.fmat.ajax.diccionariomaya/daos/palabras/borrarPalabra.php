@@ -24,6 +24,9 @@
 	if($result = mysqli_query($link, $query)){
 		$respuesta[0] =  $result;
 		$respuesta[1] = $id_palabra;
+		if(isset($_GET['nombre_audio']) && $_GET['nombre_audio'] != "null"){
+			unlink($_GET['nombre_audio']);
+		}
 	}
 	else{
 		$respuesta[0] =  $result;
