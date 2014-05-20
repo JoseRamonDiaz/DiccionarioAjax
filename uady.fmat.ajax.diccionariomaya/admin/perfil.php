@@ -64,58 +64,7 @@
             $('form').remove();
             $(".add").show();
         }
-        
-        function guardarCategoria(){
-            
-            $('#btnGuardar').attr('disabled', 'true');
-            
-            var envio = $.post("agregarCategoria.php", $("#datos").serialize());
-            envio.done(function(data){
 
-                $('form').remove();
-                $(".add").show();
-         
-                var obj = jQuery.parseJSON( data );
-  
-                 $( "tbody" ).append("<tr id="+ obj.id+"></tr>");
-                 $( "#"+obj.id ).append("<td>"+ obj.nombre+"</td>");
-                 $( "#"+obj.id ).append("<td>"+ obj.abreviatura+"</td>");
-                 $( "#"+obj.id ).append("<td><a href='javascript:crearFormEdicionCategoria("+ obj.id+");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></td>");
-                 $( "#"+obj.id ).append("<td><a href='javascript:eliminarCategoria("+ obj.id+");' class='remove'><i class='fa fa-times fa-fw'></i></a></td>");
-            
-
-            },"json").fail(function() {
-                alert("Ocurrió un error.");
-            });
-            
-  
-        }
-
-        
-          function eliminarCategoria(id){
-            
-            $('a').bind('click', false);
-            
-            var envio = $.get("eliminarCategoria.php?id=" + id);
-            envio.done(function(data){
-                
-                if (data){
-                    alert("Se ha eliminado la categoria.");
-                    $('#'+id).remove();
-                    $('a').unbind('click', false);
-                } else {
-                    alert("No se pudo eliminar la categoria.");
-                    $('a').unbind('click', false);
-                }
-  
-            }).fail(function(){
-                alert("Ocurrió un error.");
-                $('a').unbind('click', false);
-            });
-            
-
-        }
-        
         function crearFormEdicionCategoria(id){
             
             $('a').bind('click', false);
@@ -197,7 +146,7 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="perfil.php"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
                         </li>
                         <!--li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuraci&oacute;n</a>
                         </li-->
@@ -318,3 +267,4 @@
 </body>
 
 </html>
+
