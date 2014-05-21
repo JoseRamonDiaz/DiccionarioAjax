@@ -27,79 +27,108 @@
 
     <script type="text/javascript">
 
-        function crearFormEdicion(id) {
+        function crearFormEdicionNombre(id) {
            
             $('a').bind('click', false);
-            
-            var celdaNombre = $('#name').text();
-            var celdaEmail = $('#email').text(); 
-            var celdaPassword = $('#password').val();
-                                        
-            var formulario = "<form action='editarPerfil.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='editarPerfil(); return false;' id='datos'></form>"; 
+            var celda = $('#name').text(); 
+            var formulario = "<form action='editarNombrePerfil.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='editarNombre(); return false;' id='datos'></form>"; 
 
             $('#f').append(formulario);
 
             $('#f form').append("<input type='hidden' name='id' value='"+id+"'>");
-            
             $('#f form').append("<div id='nombre' class='input-group'></div><br>");
+            
             $('#f form #nombre').append("<label>Ingresa el nuevo nombre de usuario</label><br>");
-            $('#f form #nombre').append("<input type='text' name='nombre' class='input-xlarge' value='"+celdaNombre+"' size='30'>");
-            
-            $('#f form').append("<div id='password' class='input-group'></div><br>");
-            $('#f form #password').append("<label>Ingresa el nuevo password</label><br>");
-            $('#f form #password').append("<input type='password' name='password' class='input-xlarge' value='"+celdaPassword+"' size='30'><br>");
-            $('#f form #password').append("<label>Escribe el password otra vez</label><br>");
-            $('#f form #password').append("<input type='password' name='rpassword' class='input-xlarge' value='"+celdaPassword+"' size='30'>");
-            
-            $('#f form').append("<div id='email' class='input-group'></div><br>");
-            $('#f form #email').append("<label>Ingresa el nuevo email</label><br>");
-            $('#f form #email').append("<input type='text' name='email' class='input-xlarge' value='"+celdaEmail+"' size='30'>");
-            
+            $('#f form #nombre').append("<input type='text' name='nombre' class='input-xlarge' value='"+celda+"' size='30'>");
             
             $('#f form').append('<input type="submit" id="btnGuardar" value="Guardar" class="btn btn-primary"/>');
             
             $('#f form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
-      
+            
+            
+            
         }
-    
+        
+        function crearFormEdicionPassword(id) {
+           
+            $('a').bind('click', false);
+            
+            var formulario = "<form action='editarPassword.php' method='POST' enctype='application/x-www-form-urlencoded' id='datos'></form>"; 
+
+            $('#f').append(formulario);
+
+            $('#f form').append("<div id='password' class='input-group'></div><br>");
+
+            $('#f form #password').append("<label>Ingresa el nuevo password</label><br>");
+            $('#f form #password').append("<input type='password' name='password' class='input-xlarge' value='' size='30'><br>");
+            
+            $('#f form #password').append("<label>Escribe el password otra vez</label><br>");
+            $('#f form #password').append("<input type='password' name='rpassword' class='input-xlarge' value='' size='30'>");
+            
+            $('#f form').append('<input type="submit" id="btnGuardar" value="Guardar" class="btn btn-primary"/>');
+            
+            $('#f form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
+            
+            $('a').unbind('click', false);
+            
+        }
+        
+        function crearFormEdicionEmail(id) {
+           
+            $('a').bind('click', false);
+            var celda = $('#email').text(); 
+            var formulario = "<form action='editarEmail.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='editarEmail("+id+"); return false;' id='datos'></form>"; 
+
+            $('#f').append(formulario);
+
+            $('#f form').append("<div id='email' class='input-group'></div><br>");
+
+            $('#f form #email').append("<label>Ingresa el nuevo email</label><br>");
+            $('#f form #email').append("<input type='text' name='email' class='input-xlarge' value='"+celda+"' size='30'>");
+            
+            $('#f form').append('<input type="submit" id="btnGuardar" value="Guardar" class="btn btn-primary"/>');
+            
+            $('#f form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
+            
+            $('a').unbind('click', false);
+            
+        }
+
         function cancelar(){
 
             $('form').remove();
             
         }
         
-        function editarPerfil(){
+        function editarNombre(){
             
-            $('#btnGuardar').attr('disabled', 'true');
-            var envio = $.post("editarPerfil.php", $("#datos").serialize());
-            envio.done(function(data){
-
-                $('form').remove();
-
-                var obj = jQuery.parseJSON( data );
-                
-                $( "#name").empty();
-                $( "#name").append(obj.nombre);
-                $( "#email").empty();
-                $( "#email").append(obj.email);
-                
- 
-                $.ajax({
-                    type: "POST",
-                    url: "renovarSesion.php",
-                    data: { "usuario" :  obj.nombre },
-                        success: function(data){}
-                 });
-                
-
-            },"json").fail(function() {
-                alert("Ocurrió un error.");
-            });
-            
-            $('a').unbind('click', false);
-            
+    
+    $( "#datos" ).submit(function( event ) {
+            // Stop form from submitting normally
+            //event.preventDefault();
+            // Get some values from elements on the page:
+           var $form = $( this ),
+           iduser = $form.find( "input[name='id']" ).val(),
+           term = $form.find( "input[name='nombre']" ).val(),
+           url = $form.attr( "action" );
+          // Send the data using post
+           var posting = $.post( url, {id: iduser, nombre: term } );
+           // Put the results in a div
+           posting.done(function( data ) {
+           //var content = $( data ).find( "#name" );
+           
+           $('form').remove();
+           session_destroy();
+           session_start();
+            $_SESSION["usuario"] = $term;
+           $( "#f" ).append("<p>" + data + "</p>");
+           $('a').unbind('click', false);
+          });
+        });
+    
         }
         
+
     </script>
 
 </head>
@@ -179,36 +208,31 @@
                     <div class="panel-body">
                         
                     <?php
+                    
+                        require_once '../daos/daoCategoria.php';
                         
-                        require_once "../daos/daoAdministrador.php";
                         if(isset($_SESSION["usuario"])){
                             $username = $_SESSION["usuario"];
-      
+                            
                             $id = findByUsername($username);
                             
                             $administrador = findById($id);
                             
-                            if (!$administrador) echo "no encontró al usuario";
                             
-                            echo "<input type='hidden' id='password' value='".$administrador->password."'>";
                             echo "<div class='row'>";
                             echo "<div class='col-md-3'><strong>Nombre de usuario</strong></div>";
                             echo "<div class='col-md-3' id='name'>".$administrador->username."</div>";
+                            echo "<div class='col-md-1'><a href='javascript:crearFormEdicionNombre(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></div>";
                             echo "</div>";
-                            
                             echo "<div class='row'>";
                             echo "<div class='col-md-3'><strong>Password</strong></div>";
-                            echo "<div class='col-md-3' id='passwordcelda'>******</div>";
+                            echo "<div class='col-md-3'>*******</div>";
+                            echo "<div class='col-md-1'><a href='javascript:crearFormEdicionPassword(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></div>";
                             echo "</div>";
-                            
                             echo "<div class='row'>";
                             echo "<div class='col-md-3'><strong>Correo electr&oacute;nico</strong></div>";
                             echo "<div class='col-md-3' id='email'>".$administrador->email."</div>";
-                            echo "</div><br>";
-                            
-                            echo "<div class='row'>";
-                            echo "<div class='col-md-3'><strong>Editar perfil</strong></div>";
-                            echo "<div class='col-md-1'><a href='javascript:crearFormEdicion(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></div>";
+                            echo "<div class='col-md-1'><a href='javascript:crearFormEdicionEmail(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></div>";
                             echo "</div>";
                                   
                        }                  
