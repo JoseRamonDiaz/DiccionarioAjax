@@ -70,14 +70,56 @@ function findByEmail($email) {
 }
 
 /**
-* Editar contraseña del administrador
+* Localiza al usuario por su nombre
 */
-function editarPerdil($id, $password){
+function findByUsername($username) {
+
+    try{
+        $administrador = Model::factory('Administrador')
+        ->where_equal('username', $username)
+        ->find_one();
+        
+        if ($administrador){
+            return $administrador->administrador_id;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
     
+        return false;    
+    }
+    
+}
+
+/**
+* Localiza al usuario por id
+*/
+function findById($id) {
+
     try{
         $administrador = Model::factory('Administrador')
         ->where_equal('administrador_id', $id)
         ->find_one();
+        
+        if ($administrador){
+            return $administrador;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+    
+        return false;    
+    }
+    
+}
+
+/**
+* Editar contraseña del administrador
+*/
+function editarContrasenia($id, $password){
+    
+    try{
+        $administrador = findById($id);
         
         if ($administrador){
             $administrador-> password = $password;
@@ -93,7 +135,57 @@ function editarPerdil($id, $password){
     
         return false;    
     }
-    
-    
+  
 }
+
+/**
+* Editar nombre de usuario del administrador
+*/
+function editarNombreUsuario($id, $username){
+    
+    try{
+        $administrador = findById($id);
+        
+        if ($administrador){
+            $administrador-> username = $username;
+            $administrador-> save();
+        
+            return true;
+            
+        } else {
+            return false;
+        }
+        
+    } catch (Exception $e) {
+    
+        return false;    
+    }
+  
+}
+
+/**
+* Editar email del administrador
+*/
+function editarEmail($id, $email){
+    
+    try{
+        $administrador = findById($id);
+        
+        if ($administrador){
+            $administrador-> email = $email;
+            $administrador-> save();
+        
+            return true;
+            
+        } else {
+            return false;
+        }
+        
+    } catch (Exception $e) {
+    
+        return false;    
+    }
+  
+}
+
 ?>

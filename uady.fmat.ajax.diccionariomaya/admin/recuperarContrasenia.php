@@ -14,7 +14,7 @@
                 //$usuario_clave = $nueva_clave; // la nueva contraseña que se enviará por correo al usuario
                 //$usuario_clave2 = md5($usuario_clave); // encriptamos la nueva contraseña para guardarla en la BD
                 // actualizamos los datos (contraseña) del usuario que solicitó su contraseña
-                $exito = editarPerdil($id, $nueva_clave);
+                $exito = editarContrasenia($id, $nueva_clave);
                 
                 if ($exito){
                     // Enviamos por email la nueva contraseña

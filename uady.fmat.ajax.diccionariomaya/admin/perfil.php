@@ -27,74 +27,75 @@
 
     <script type="text/javascript">
 
-        function crearFormulario() {
-            
-            $('.add').hide();
-
-            //var formulario=document.createElement("form");
-
-            //formulario.action = "agregarCategoria.php";
-            //formulario.method = "POST";
-            //formulario.enctype="application/x-www-form-urlencoded";
-            //formulario.onsubmit="guardarCategoria(); return false;";
-            //formulario.id = "datos";
+        function crearFormEdicionNombre(id) {
            
-            var formulario = "<form action='agregarCategoria.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='guardarCategoria(); return false;' id='datos'></form>";
-            //formulario.innerHTML="<input class='form-control'><p class='help-block'>Example block-level help text here.</p></div> <br/> Abreviatura <input type='text' name='abreviatura' value=''/> <br/> <button type='submit' class='btn btn-default'>Submit Button</button>";  
+            $('a').bind('click', false);
+            var celda = $('#name').text(); 
+            var formulario = "<form action='editarNombre.php' method='POST' enctype='application/x-www-form-urlencoded' id='datos'></form>"; 
 
-            $('#addCategory').append(formulario);
+            $('#f').append(formulario);
 
-            $('#addCategory form').append("<div id='nombre' class='input-group'></div><br>");
+            $('#f form').append("<div id='nombre' class='input-group'></div><br>");
 
-            //$("#addCategory form #nombre").append("<span class='input-group-addon'>Nombre</span>");
-            $('#addCategory form #nombre').append("<input type='text' name='nombre' class='input-xlarge' placeholder='Nombre' size='30'>");
+            $('#f form #nombre').append("<label>Ingresa el nuevo nombre de usuario</label><br>");
+            $('#f form #nombre').append("<input type='text' name='nombre' class='input-xlarge' value='"+celda+"' size='30'>");
             
-            $('#addCategory form').append("<div id='abrev' class='input-group'></div>");
+            $('#f form').append('<input type="submit" id="btnGuardar" value="Guardar" class="btn btn-primary"/>');
+            
+            $('#f form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
+            
+            $('a').unbind('click', false);
+            
+        }
+        
+        function crearFormEdicionPassword(id) {
+           
+            $('a').bind('click', false);
+            
+            var formulario = "<form action='editarPassword.php' method='POST' enctype='application/x-www-form-urlencoded' id='datos'></form>"; 
 
-            //$("#addCategory form #abrev").append("<span class='input-group-addon'>Abreviatura</span>");
-            $('#addCategory form #abrev').append("<input type='text' name='abreviatura' class='input-xlarge' placeholder='Abreviatura' size='30'>");
+            $('#f').append(formulario);
+
+            $('#f form').append("<div id='password' class='input-group'></div><br>");
+
+            $('#f form #password').append("<label>Ingresa el nuevo password</label><br>");
+            $('#f form #password').append("<input type='password' name='password' class='input-xlarge' value='' size='30'><br>");
             
-            $('#addCategory form').append('<br><input type="submit" id="btnGuardar" value="A&ntilde;adir categor&iacute;a" class="btn btn-primary"/>');
+            $('#f form #password').append("<label>Escribe el password otra vez</label><br>");
+            $('#f form #password').append("<input type='password' name='rpassword' class='input-xlarge' value='' size='30'>");
             
-            $('#addCategory form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
+            $('#f form').append('<input type="submit" id="btnGuardar" value="Guardar" class="btn btn-primary"/>');
+            
+            $('#f form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
+            
+            $('a').unbind('click', false);
+            
+        }
+        
+        function crearFormEdicionEmail(id) {
+           
+            $('a').bind('click', false);
+            var celda = $('#email').text(); 
+            var formulario = "<form action='editarEmail.php' method='POST' enctype='application/x-www-form-urlencoded' id='datos'></form>"; 
+
+            $('#f').append(formulario);
+
+            $('#f form').append("<div id='email' class='input-group'></div><br>");
+
+            $('#f form #email').append("<label>Ingresa el nuevo email</label><br>");
+            $('#f form #email').append("<input type='text' name='email' class='input-xlarge' value='"+celda+"' size='30'>");
+            
+            $('#f form').append('<input type="submit" id="btnGuardar" value="Guardar" class="btn btn-primary"/>');
+            
+            $('#f form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
+            
+            $('a').unbind('click', false);
+            
         }
 
         function cancelar(){
 
             $('form').remove();
-            $(".add").show();
-        }
-
-        function crearFormEdicionCategoria(id){
-            
-            $('a').bind('click', false);
-            var celda1 = $('#' + id).find('td:eq(0)').html();   
-            var celda2 = $('#' + id).find('td:eq(1)').html(); 
-        
-            $('#' + id).empty();
-            $('#' + id).append("<td id='tdedit'></td>");
-      
-            var formulario = "<form action='editarCategoria.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='editarCategoria("+id+"); return false;' id='datos'></form>";
-            //formulario.innerHTML="<input class='form-control'><p class='help-block'>Example block-level help text here.</p></div> <br/> Abreviatura <input type='text' name='abreviatura' value=''/> <br/> <button type='submit' class='btn btn-default'>Submit Button</button>";  
-
-            $('#tdedit').append(formulario);
-
-            $('#tdedit form').append("<div id='nombre' class='input-group'></div><br>");
-            
-            
-            $('#tdedit form').append("<input type='hidden' name='id' value='"+id+"'>");
-            //$("#addCategory form #nombre").append("<span class='input-group-addon'>Nombre</span>");
-            $('#tdedit form #nombre').append("<input type='text' name='nombre' class='input-xlarge' value='"+celda1+"' size='30'>");
-            
-            $('#tdedit form').append("<div id='abrev' class='input-group'></div>");
-
-            //$("#addCategory form #abrev").append("<span class='input-group-addon'>Abreviatura</span>");
-            $('#tdedit form #abrev').append("<input type='text' name='abreviatura' class='input-xlarge' value='"+celda2+"' size='30'>");
-            
-            $('#tdedit form').append('<br><input type="submit" id="btnEditar" value="Guardar categor&iacute;a" class="btn btn-primary"/>');
-            
-            //$('#tdedit form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
-            
             
         }
         
@@ -198,52 +199,47 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Categor&iacute;a</h1>
+                    <h1 class="page-header">Perfil de usuario</h1>
                     
                     <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Abreviatura</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
+                        
                     <?php
                     
                         require_once '../daos/daoCategoria.php';
-
-                        //listar todas las categorías
-                        $lista_categorias = obtenerTodasCategorias();
-                                     
-                        foreach ($lista_categorias as $record) {
-                            $id = $record->categoria_id;
-                            $nombre = $record->nombre;
-                            $abreviatura = $record->abreviatura;
-                            echo "<tr id=".$id.">";
-                            echo "<td>".$nombre."</td>";
-                            echo "<td>".$abreviatura."</td>";
-                            echo "<td><a href='javascript:crearFormEdicionCategoria(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></td>";
-                            echo "<td><a href='javascript:eliminarCategoria(".$id.");' class='remove'><i class='fa fa-times fa-fw'></i></a></td>";
-                            echo "</tr>";
-                        }                  
+                        
+                        if(isset($_SESSION["usuario"])){
+                            $username = $_SESSION["usuario"];
+                            
+                            $id = findByUsername($username);
+                            
+                            $administrador = findById($id);
+                            
+                            
+                            echo "<div class='row'>";
+                            echo "<div class='col-md-3'><strong>Nombre de usuario</strong></div>";
+                            echo "<div class='col-md-3' id='name'>".$administrador->username."</div>";
+                            echo "<div class='col-md-1'><a href='javascript:crearFormEdicionNombre(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></div>";
+                            echo "</div>";
+                            echo "<div class='row'>";
+                            echo "<div class='col-md-3'><strong>Password</strong></div>";
+                            echo "<div class='col-md-3'>*******</div>";
+                            echo "<div class='col-md-1'><a href='javascript:crearFormEdicionPassword(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></div>";
+                            echo "</div>";
+                            echo "<div class='row'>";
+                            echo "<div class='col-md-3'><strong>Correo electr&oacute;nico</strong></div>";
+                            echo "<div class='col-md-3' id='email'>".$administrador->email."</div>";
+                            echo "<div class='col-md-1'><a href='javascript:crearFormEdicionEmail(".$id.");' class='edit'><i class='fa fa-pencil fa-fw'></i></a></div>";
+                            echo "</div>";
+                                  
+                       }                  
 
                     ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        <br>
+                        <div id="f"></div>
                     </div>    
-
-                    <div id="addCategory"></div>
-                    <br>
-                    <a href='javascript:crearFormulario();' class="add"><i class="fa fa-plus fa-fw"></i>A&ntilde;adir Categor&iacute;a</a>
-                         
                 </div>
                 <!-- /.col-lg-12 -->
+                
             </div>
             <!-- /.row -->
         </div>
