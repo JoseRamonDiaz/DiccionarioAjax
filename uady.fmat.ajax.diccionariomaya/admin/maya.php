@@ -31,14 +31,7 @@
 	
 	    <!-- Core Scripts - Include with every page -->
     <script src="../js/bootstrap.min.js"></script>
-    
-
-    <!-- Page-Level Plugin Scripts - Blank -->
-
-    <!-- SB Admin Scripts - Include with every page -->
-    <script src="../js/sb-admin.js"></script>
-    
-    
+ 
     <!-- Gestión de palabras -->
 
     <!-- Admin - Include with every page -->

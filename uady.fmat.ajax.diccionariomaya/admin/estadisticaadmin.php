@@ -24,8 +24,7 @@
 		<script src="../js/dist/jquery.jqplot.min.js"></script>
 		<script src="../js/dist/plugins/jqplot.categoryAxisRenderer.min.js"></script>
 		<script src="../js/dist/plugins/jqplot.barRenderer.min.js"></script>
-		<script src="../js/sb-admin.js"></script>
-		
+				
 		<script src="../js/bootstrap.min.js"></script>
 		
 		

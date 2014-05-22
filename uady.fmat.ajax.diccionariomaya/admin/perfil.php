@@ -48,9 +48,9 @@
             
             $('#f form').append("<div id='password' class='input-group'></div><br>");
             $('#f form #password').append("<label>Ingresa el nuevo password</label><br>");
-            $('#f form #password').append("<input type='password' name='password' class='input-xlarge' value='"+celdaPassword+"' size='30'><br>");
+            $('#f form #password').append("<input type='password' id='pass1' name='password' class='input-xlarge' value='"+celdaPassword+"' size='30'><br>");
             $('#f form #password').append("<label>Escribe el password otra vez</label><br>");
-            $('#f form #password').append("<input type='password' name='rpassword' class='input-xlarge' value='"+celdaPassword+"' size='30'>");
+            $('#f form #password').append("<input type='password' id='pass2' name='rpassword' class='input-xlarge' value='"+celdaPassword+"' size='30' onblur='validarPassword()'>");
             
             $('#f form').append("<div id='email' class='input-group'></div><br>");
             $('#f form #email').append("<label>Ingresa el nuevo email</label><br>");
@@ -61,6 +61,15 @@
             
             $('#f form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
       
+        }
+        
+        function validarPassword(){
+            
+            var password1= $('#pass1').val();
+            var password2= $('#pass2').val();
+            
+            console.log(password1);
+            console.log(password2);
         }
     
         function cancelar(){
@@ -221,15 +230,7 @@
     <!-- Core Scripts - Include with every page -->
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    
-
-    <!-- Page-Level Plugin Scripts - Blank -->
-
-    <!-- SB Admin Scripts - Include with every page -->
-    <script src="../js/sb-admin.js"></script>
-
-    <!-- Page-Level Demo Scripts - Blank - Use for reference -->
-
+ 
 </body>
 
 </html>
