@@ -21,7 +21,7 @@ function validarEdicion(){
      var errores = new Array();
     var palabra = $("#palabra").val();
     
-    removeFeedback();
+    removeFeedbackEdicion();
     
     if(!palabraValida(palabra))
         errores.push("palabra");
@@ -31,7 +31,7 @@ function validarEdicion(){
         return true;
     }
     else{
-        provideFeedback(errores);
+        provideFeedbackEdicion(errores);
         return false;
     }
 }
