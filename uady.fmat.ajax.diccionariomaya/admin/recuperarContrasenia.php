@@ -26,7 +26,7 @@
                     $cabeceras = $cabeceras."Mime-Version: 1.0\n";
                     $cabeceras = $cabeceras."Content-Type: text/html";
                     $enviar_email = mail($email,$asunto,$mensaje,$cabeceras);
-                    echo $enviar_email;
+                    
                     if($enviar_email) {
                         echo "La nueva contraseña ha sido enviada al email ".$email.".";
                     }else {
@@ -37,7 +37,7 @@
                     echo "Ocurrió un error.";
                 }
             }else {
-                echo "El usuario con e-mail<strong>".$email."</strong> no está registrado. <a href='javascript:history.back();'>Reintentar</a>";
+                echo "El usuario con e-mail <strong>".$email."</strong> no está registrado. <a href='javascript:history.back();'>Reintentar</a>";
             }
         }
     }else {
@@ -45,7 +45,7 @@
     <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
         <label>Email:</label><br />
         <input type="text" name="email" /><br />
-        <input type="submit" name="enviar" value="Enviar" />
+        <input type="submit" name="enviar" value="Enviar nueva contraseña" />
     </form>
 <?php
     }
