@@ -58,7 +58,7 @@
 	
 	function actualizarPalabraMaya($id_palabra, $palabra_maya, $id_categoria){
 		$conexion = obtener_conexion();
-		
+		$palabra_maya = mysqli_real_escape_string ($conexion,$palabra_maya);
 		$query = "UPDATE maya SET texto_maya = '$palabra_maya', categoria_id = $id_categoria WHERE maya_id = $id_palabra";
 			
 		if(!($result = mysqli_query($conexion, $query))){
@@ -97,7 +97,7 @@
 		$id_palabra = 0;
 
 		$conexion = obtener_conexion();
-		
+		$palabra_maya = mysqli_real_escape_string ($conexion,$palabra_maya);
 		$query = "SELECT maya_id FROM maya WHERE texto_maya = '$palabra_maya' AND categoria_id = $id_categoria";
 		
 		if($result = mysqli_query($conexion, $query)){

@@ -70,7 +70,7 @@
 		$id_palabra = 0;
 		
 		$conexion = obtener_conexion();
-		
+		$palabra_maya = mysqli_real_escape_string ($conexion,$palabra_maya);
 		$query = "INSERT INTO maya (texto_maya, categoria_id) VALUES ( '$palabra_maya', $id_categoria)";
 			
 		if($result = mysqli_query($conexion, $query)){
@@ -119,7 +119,7 @@
 		$id_palabra = 0;
 
 		$conexion = obtener_conexion();
-		
+		$palabra_maya = mysqli_real_escape_string ($conexion,$palabra_maya);
 		$query = "SELECT maya_id FROM maya WHERE texto_maya = '$palabra_maya' AND categoria_id = $id_categoria";
 		
 		if($result = mysqli_query($conexion, $query)){

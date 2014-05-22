@@ -3,6 +3,7 @@
     include '../daos/conexion.php';
     $link = mysqli_connect($host, $user, $password, $database);
 
+	$palabraParcial = mysqli_real_escape_string ($link,$palabraParcial);
     $query = "";
     if ($tipoTraduccion == "esma") {
         $query = "SELECT DISTINCT texto_espaniol FROM espaniol WHERE texto_espaniol LIKE '%$palabraParcial%'";
