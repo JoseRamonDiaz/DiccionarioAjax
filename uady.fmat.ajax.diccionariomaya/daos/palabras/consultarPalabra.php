@@ -12,7 +12,7 @@
 		die( json_encode( array( false, $msg)));
 	}
 	$query="";
-	
+	$palabra = mysqli_real_escape_string ($link,$palabra);
 	if ($idioma == "es") {
 		$query = "SELECT nombre, espaniol_id, texto_espaniol FROM espaniol JOIN categoria ON (categoria.categoria_id = espaniol.categoria_id) WHERE texto_espaniol = '$palabra'";
     }

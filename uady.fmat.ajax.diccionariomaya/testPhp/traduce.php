@@ -20,6 +20,8 @@
         include '../daos/conexion.php';
         $link = mysqli_connect($host, $user, $password, $database);
         $query = "";
+		$respuesta = "<h2>".$palabraATraducir."</h2>";
+		$palabraATraducir = mysqli_real_escape_string ($link,$palabraATraducir);
         if($tipoTraduccion == "esma")
             $query = "SELECT texto_maya,abreviatura,nombre_audio FROM categoria INNER JOIN(SELECT texto_maya,categoria_id,nombre_audio FROM maya WHERE maya_id IN (SELECT maya_id FROM espaniol_maya WHERE espaniol_id IN (SELECT espaniol_id FROM espaniol WHERE texto_espaniol = '$palabraATraducir'))) AS b ON categoria.categoria_id = b.categoria_id";
         else
@@ -37,7 +39,7 @@
             mysqli_query($link, $queryIncremento);
         }
         $ids;
-        $respuesta = "<h2>".$palabraATraducir."</h2>";
+        
             //echo $respuesta;
         $respuesta .= "<h3>Traducción</h3>";
         $rutaAudio = "";
