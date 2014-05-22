@@ -242,6 +242,9 @@
                         <li>
                             <a href="diccionario.php"><i class="fa fa-wrench fa-fw"></i> Diccionario</a>
                         </li>
+						<li>
+                            <a href="estadisticaadmin.php"><i class="fa fa-wrench fa-fw"></i> Estadísticas</a>
+                        </li>
                     </ul>
                     <!-- /#side-menu -->
                 </div>
