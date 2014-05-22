@@ -1,0 +1,788 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Ubicaciones Geogáficas</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="diccionario maya, traductor, traductor maya a español, traductor español a maya, ubicacion geografica de los mayas" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <link rel="shorcut icon"  href="style/piramide.png" type="image/png">
+  
+  <!--<link rel="stylesheet" href="../../jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css">-->
+  <link rel="stylesheet" href="js/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css">
+  <script src="js/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js"></script>
+  <!--<script src="../../jquery-ui-1.10.4.custom/js/jquery-ui.js"></script> -->
+  <!--<script src="../../jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script> -->
+  <script src="js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"> </script>
+  
+  
+  <script>
+	var map;
+	var markers = [];
+
+  $(function() {
+	$( "#tabs" ).tabs({
+		activate: function( event, ui ) {
+			switch($( "#tabs" ).tabs( "option", "active" )){
+			case 0:
+				clearMarkers();
+				addYucatanMarkers();
+				setMarkers(map);
+			break;
+			case 1:
+				clearMarkers();
+				addCampecheMarkers();
+				setMarkers(map);
+			break;
+			case 2:
+				clearMarkers();
+				addQuintanarooMarkers();
+				setMarkers(map);
+			break;
+			case 3:
+				clearMarkers();
+				addChiapasMarkers();
+				setMarkers(map);
+			break;
+			case 4:
+				clearMarkers();
+				addTabascoMarkers();
+				setMarkers(map);
+			break;
+			case 5:
+				clearMarkers();
+				addBeliceMarkers();
+				setMarkers(map);
+			break;
+			case 6:
+				clearMarkers();
+				addGuatemalaMarkers();
+				setMarkers(map);
+			break;
+			case 7:
+				clearMarkers();
+				addHondurasMarkers();
+				setMarkers(map);
+			break;
+			case 8:
+				clearMarkers();
+				addSalvadorMarkers();
+				setMarkers(map);
+			break;
+			}
+		}
+	});
+	inicializaMapa();
+  });
+  
+  
+	function setMarkers(oMapa){
+		for (var i = 0; i < markers.length; i++) {
+			markers[i].setMap(oMapa);
+		}
+	}
+	
+	function clearMarkers(){
+		setMarkers(null);
+		markers = [];
+	}
+
+	function inicializaMapa(){
+		var mapOptions = {
+			center: new google.maps.LatLng(20.760404, -88.975698),
+			zoom: 8,
+			mapTypeId:google.maps.MapTypeId.TERRAIN
+			
+		};
+				
+		map = new google.maps.Map(document.getElementById("mapaYucatan"), mapOptions);
+		
+		addYucatanMarkers();
+		setMarkers(map);
+	}
+  
+	//YUCATAN
+  	
+	function addYucatanMarkers(){
+	map.setCenter(new google.maps.LatLng(20.760404, -88.975698));
+	
+	//Declaracion de las variables con ubicaciones de las zonas arqueologicas			
+  var chichen = new google.maps.LatLng(20.684531, -88.567536);
+  var ekBalam = new google.maps.LatLng(20.890805, -88.136061);
+  var acanceh = new google.maps.LatLng(20.810798, -89.452471);
+  var dzibilchaltun = new google.maps.LatLng(21.091881, -89.595183);
+  var uxmal = new google.maps.LatLng(20.363980, -89.765339);
+	
+	//Declaracion de los marcadores de las ubicaciones
+  var markerChichen = new google.maps.Marker({
+					position: chichen,
+					title: "Chichen Itza",
+					icon: 'style/piramide.png'
+				});		
+  var markerEkBalam = new google.maps.Marker({
+					position: ekBalam,
+					title: "Ek Balam",
+					icon: 'style/piramide.png'
+				});			
+ var markerAcanceh = new google.maps.Marker({
+					position: acanceh,
+					title: "Acanceh",
+					icon: 'style/piramide.png'
+				});
+
+var markerDzibilchaltun = new google.maps.Marker({
+					position: dzibilchaltun,
+					title: "Dzibilchaltun",
+					icon: 'style/piramide.png'
+				});				
+				
+var markerUxmal = new google.maps.Marker({
+					position: uxmal,
+					title: "Uxmal",
+					icon: 'style/piramide.png'
+				});				
+  
+  
+			
+	//Asignacion de los marcadores al mapa
+				markers.push(markerChichen);
+				markers.push(markerEkBalam);
+				markers.push(markerAcanceh);
+				markers.push(markerDzibilchaltun);
+				markers.push(markerUxmal);
+	
+	//Declaracion de las variables para las ventanas de informacion
+  var infowindowChichen = new google.maps.InfoWindow({
+  content:"Chichen Itza-Maravilla del Mundo"
+  });
+  var infowindowEkBalam = new google.maps.InfoWindow({
+  content:"Ek Balam"
+  });
+  var infowindowAcanceh = new google.maps.InfoWindow({
+  content:"Acanceh"
+  });
+  var infowindowDzibilchaltun = new google.maps.InfoWindow({
+  content:"Dzibilchaltun"
+  });
+  var infowindowUxmal = new google.maps.InfoWindow({
+  content:"Uxmal"
+  });
+  
+  //Eventos para cada marcador
+ google.maps.event.addListener(markerChichen, 'click', function() {
+  infowindowChichen.open(map,markerChichen);
+  });
+  google.maps.event.addListener(markerEkBalam, 'click', function() {
+  infowindowEkBalam.open(map,markerEkBalam);
+  });
+  google.maps.event.addListener(markerAcanceh, 'click', function() {
+  infowindowAcanceh.open(map,markerAcanceh);
+  });
+  google.maps.event.addListener(markerDzibilchaltun, 'click', function() {
+  infowindowDzibilchaltun.open(map,markerDzibilchaltun);
+  });
+  google.maps.event.addListener(markerUxmal, 'click', function() {
+  infowindowUxmal.open(map,markerUxmal);
+  });
+ 
+
+ }
+  
+  //CAMPECHE
+			function addCampecheMarkers(){
+				map.setCenter(new google.maps.LatLng(19.322210, -90.636721));
+	//Declaracion de las variables con ubicaciones de las zonas arqueologicas			
+  var edzna = new google.maps.LatLng(19.597090, -90.229159);
+  var calakmul = new google.maps.LatLng(18.114861, -89.808244);
+  var chicanna = new google.maps.LatLng(18.505417, -89.486588);
+  
+  //Declaracion de los marcadores de las ubicaciones
+  var markerEdzna = new google.maps.Marker({
+					position: edzna,
+					title: "Edzna",
+					icon: 'style/piramide.png'
+				});		
+  var markerCalakmul = new google.maps.Marker({
+					position: calakmul,
+					title: "Calakmul",
+					icon: 'style/piramide.png'
+				});			
+ var markerChicanna = new google.maps.Marker({
+					position: chicanna,
+					title: "Chicanna",
+					icon: 'style/piramide.png'
+				});
+
+	//Asignacion de los marcadores al mapa
+				markers.push(markerEdzna);
+				markers.push(markerCalakmul);
+				markers.push(markerChicanna);
+				
+	//Declaracion de las variables para las ventanas de informacion
+  var infowindowEdzna = new google.maps.InfoWindow({
+  content:"Edzna"
+  });
+  var infowindowCalakmul = new google.maps.InfoWindow({
+  content:"Calakmul"
+  });
+  var infowindowChicanna = new google.maps.InfoWindow({
+  content:"Chicanna"
+  });
+  
+  //Eventos para cada marcador
+ google.maps.event.addListener(markerEdzna, 'click', function() {
+  infowindowEdzna.open(map,markerEdzna);
+  });
+  google.maps.event.addListener(markerCalakmul, 'click', function() {
+  infowindowCalakmul.open(map,markerCalakmul);
+  });
+  google.maps.event.addListener(markerChicanna, 'click', function() {
+  infowindowChicanna.open(map,markerChicanna);
+  });
+ 
+
+ }  
+  
+  //QUINTANA ROO
+			function addQuintanarooMarkers(){
+				map.setCenter(new google.maps.LatLng(19.647064, -88.204764));
+	//Declaracion de las variables con ubicaciones de las zonas arqueologicas			
+  var tulum = new google.maps.LatLng(20.200345, -87.444584);
+  var coba = new google.maps.LatLng(20.487625, -87.735795);
+  var muyil = new google.maps.LatLng(20.078851, -87.611043);
+  var oxtankah = new google.maps.LatLng(18.555162, -88.252858);
+ 
+  
+  //Declaracion de los marcadores de las ubicaciones
+  var markerTulum = new google.maps.Marker({
+					position: tulum,
+					title: "Tulum",
+					icon: 'style/piramide.png'
+				});		
+  var markerCoba = new google.maps.Marker({
+					position: coba,
+					title: "Coba",
+					icon: 'style/piramide.png'
+				});			
+ var markerMuyil = new google.maps.Marker({
+					position: muyil,
+					title: "Muyil",
+					icon: 'style/piramide.png'
+				});
+
+var markerOxtankah = new google.maps.Marker({
+					position: oxtankah,
+					title: "Oxtankah",
+					icon: 'style/piramide.png'
+				});				
+				
+	//Asignacion de los marcadores al mapa
+				markers.push(markerTulum);
+				markers.push(markerCoba);
+				markers.push(markerMuyil);
+				markers.push(markerOxtankah);
+				
+	//Declaracion de las variables para las ventanas de informacion
+  var infowindowTulum = new google.maps.InfoWindow({
+  content:"Tulum"
+  });
+  var infowindowCoba = new google.maps.InfoWindow({
+  content:"Coba"
+  });
+  var infowindowMuyil = new google.maps.InfoWindow({
+  content:"Muyil"
+  });
+  var infowindowOxtankah = new google.maps.InfoWindow({
+  content:"Oxtankah"
+  });
+  
+  //Eventos para cada marcador
+ google.maps.event.addListener(markerTulum, 'click', function() {
+  infowindowTulum.open(map,markerTulum);
+  });
+  google.maps.event.addListener(markerCoba, 'click', function() {
+  infowindowCoba.open(map,markerCoba);
+  });
+  google.maps.event.addListener(markerMuyil, 'click', function() {
+  infowindowMuyil.open(map,markerMuyil);
+  });
+  google.maps.event.addListener(markerOxtankah, 'click', function() {
+  infowindowOxtankah.open(map,markerOxtankah);
+  });
+
+ } 
+  //CHIAPAS
+			function addChiapasMarkers(){
+			map.setCenter(new google.maps.LatLng(16.678300, -91.795321));
+	//Declaracion de las variables con ubicaciones de las zonas arqueologicas			
+  var yaxchilan = new google.maps.LatLng(16.720133, -91.240596);
+  var bonampak = new google.maps.LatLng(16.703769, -91.053490);
+  var palenque = new google.maps.LatLng(17.481175, -92.039596);
+  var chincultik = new google.maps.LatLng(16.127150, -91.778862);
+ 
+  
+  //Declaracion de los marcadores de las ubicaciones
+  var markerYaxchilan = new google.maps.Marker({
+					position: yaxchilan,
+					title: "Yaxchilan",
+					icon: 'style/piramide.png'
+				});		
+  var markerBonampak = new google.maps.Marker({
+					position: bonampak,
+					title: "Bonampak",
+					icon: 'style/piramide.png'
+				});			
+ var markerPalenque = new google.maps.Marker({
+					position: palenque,
+					title: "Palenque",
+					icon: 'style/piramide.png'
+				});
+
+var markerChincultik = new google.maps.Marker({
+					position: chincultik,
+					title: "Chincultik",
+					icon: 'style/piramide.png'
+				});				
+				
+	//Asignacion de los marcadores al mapa
+				markers.push(markerYaxchilan);
+				markers.push(markerBonampak);
+				markers.push(markerPalenque);
+				markers.push(markerChincultik);
+				
+	//Declaracion de las variables para las ventanas de informacion
+  var infowindowYaxchilan = new google.maps.InfoWindow({
+  content:"Yaxchilan"
+  });
+  var infowindowBonampak = new google.maps.InfoWindow({
+  content:"Bonampak"
+  });
+  var infowindowPalenque = new google.maps.InfoWindow({
+  content:"Palenque"
+  });
+  var infowindowChincultik = new google.maps.InfoWindow({
+  content:"Chincultik"
+  });
+  
+  //Eventos para cada marcador
+ google.maps.event.addListener(markerYaxchilan, 'click', function() {
+  infowindowYaxchilan.open(map,markerYaxchilan);
+  });
+  google.maps.event.addListener(markerBonampak, 'click', function() {
+  infowindowBonampak.open(map,markerBonampak);
+  });
+  google.maps.event.addListener(markerPalenque, 'click', function() {
+  infowindowPalenque.open(map,markerPalenque);
+  });
+  google.maps.event.addListener(markerChincultik, 'click', function() {
+  infowindowChincultik.open(map,markerChincultik);
+  });
+ 
+ } 
+ 
+ 
+ //TABASCO
+			function addTabascoMarkers(){
+		map.setCenter(new google.maps.LatLng(17.872072, -92.630249));
+	//Declaracion de las variables con ubicaciones de las zonas arqueologicas			
+  var comalcalco = new google.maps.LatLng(18.278882, -93.204981);
+  var pomona = new google.maps.LatLng(17.457309, -91.424630);
+  var malpasito = new google.maps.LatLng(17.337540, -93.598645);
+  
+  
+  //Declaracion de los marcadores de las ubicaciones
+  var markerComalcalco = new google.maps.Marker({
+					position: comalcalco,
+					title: "Comalcalco",
+					icon: 'style/piramide.png'
+				});		
+  var markerPomona = new google.maps.Marker({
+					position: pomona,
+					title: "Pomona",
+					icon: 'style/piramide.png'
+				});			
+ var markerMalpasito = new google.maps.Marker({
+					position: malpasito,
+					title: "Malpasito",
+					icon: 'style/piramide.png'
+				});
+
+	//Asignacion de los marcadores al mapa
+				markers.push(markerComalcalco);
+				markers.push(markerPomona);
+				markers.push(markerMalpasito);
+				
+	//Declaracion de las variables para las ventanas de informacion
+  var infowindowComalcalco = new google.maps.InfoWindow({
+  content:"Comalcalco"
+  });
+  var infowindowPomona = new google.maps.InfoWindow({
+  content:"Pomona"
+  });
+  var infowindowMalpasito = new google.maps.InfoWindow({
+  content:"Malpasito"
+  });
+  
+  //Eventos para cada marcador
+ google.maps.event.addListener(markerComalcalco, 'click', function() {
+  infowindowComalcalco.open(map,markerComalcalco);
+  });
+  google.maps.event.addListener(markerPomona, 'click', function() {
+  infowindowPomona.open(map,markerPomona);
+  });
+  google.maps.event.addListener(markerMalpasito, 'click', function() {
+  infowindowMalpasito.open(map,markerMalpasito);
+  });
+
+ } 
+ 
+  //BELICE
+			function addBeliceMarkers(){
+			map.setCenter(new google.maps.LatLng(17.196028, -88.639809));
+	//Declaracion de las variables con ubicaciones de las zonas arqueologicas			
+  var altunHa = new google.maps.LatLng(17.763827, -88.346675);
+  var caracol = new google.maps.LatLng(16.762984, -89.117845);
+  var santaRita = new google.maps.LatLng(18.101053, -88.568387);
+  
+  
+  //Declaracion de los marcadores de las ubicaciones
+  var markerAltunHa = new google.maps.Marker({
+					position: altunHa,
+					title: "AltunHa",
+					icon: 'style/piramide.png'
+				});		
+  var markerCaracol = new google.maps.Marker({
+					position: caracol,
+					title: "Caracol",
+					icon: 'style/piramide.png'
+				});			
+ var markerSantaRita = new google.maps.Marker({
+					position: santaRita,
+					title: "SantaRita",
+					icon: 'style/piramide.png'
+				});
+
+	//Asignacion de los marcadores al mapa
+				markers.push(markerAltunHa);
+				markers.push(markerCaracol);
+				markers.push(markerSantaRita);
+				
+	//Declaracion de las variables para las ventanas de informacion
+  var infowindowAltunHa = new google.maps.InfoWindow({
+  content:"AltunHa"
+  });
+  var infowindowCaracol = new google.maps.InfoWindow({
+  content:"Caracol"
+  });
+  var infowindowSantaRita = new google.maps.InfoWindow({
+  content:"SantaRita"
+  });
+  
+  //Eventos para cada marcador
+ google.maps.event.addListener(markerAltunHa, 'click', function() {
+  infowindowAltunHa.open(map,markerAltunHa);
+  });
+  google.maps.event.addListener(markerCaracol, 'click', function() {
+  infowindowCaracol.open(map,markerCaracol);
+  });
+  google.maps.event.addListener(markerSantaRita, 'click', function() {
+  infowindowSantaRita.open(map,markerSantaRita);
+  });
+
+ } 
+ 
+ //GUATEMALA
+			function addGuatemalaMarkers(){
+			map.setCenter(new google.maps.LatLng(15.941233, -90.137509));
+	//Declaracion de las variables con ubicaciones de las zonas arqueologicas			
+  var tikal = new google.maps.LatLng(17.223258, -89.621622);
+  var iximche = new google.maps.LatLng(14.734475, -90.994627);
+  var mixcoViejo = new google.maps.LatLng(14.871386, -90.664864);
+  
+  
+  //Declaracion de los marcadores de las ubicaciones
+  var markerTikal = new google.maps.Marker({
+					position: tikal,
+					title: "Tikal",
+					icon: 'style/piramide.png'
+				});		
+  var markerIximche = new google.maps.Marker({
+					position: iximche,
+					title: "Iximche",
+					icon: 'style/piramide.png'
+				});			
+ var markerMixcoViejo = new google.maps.Marker({
+					position: mixcoViejo,
+					title: "MixcoViejo",
+					icon: 'style/piramide.png'
+				});
+
+	//Asignacion de los marcadores al mapa
+				markers.push(markerTikal);
+				markers.push(markerIximche);
+				markers.push(markerMixcoViejo);
+				
+	//Declaracion de las variables para las ventanas de informacion
+  var infowindowTikal = new google.maps.InfoWindow({
+  content:"Tikal"
+  });
+  var infowindowIximche = new google.maps.InfoWindow({
+  content:"Iximche"
+  });
+  var infowindowMixcoViejo = new google.maps.InfoWindow({
+  content:"MixcoViejo"
+  });
+  
+  //Eventos para cada marcador
+ google.maps.event.addListener(markerTikal, 'click', function() {
+  infowindowTikal.open(map,markerTikal);
+  });
+  google.maps.event.addListener(markerIximche, 'click', function() {
+  infowindowIximche.open(map,markerIximche);
+  });
+  google.maps.event.addListener(markerMixcoViejo, 'click', function() {
+  infowindowMixcoViejo.open(map,markerMixcoViejo);
+  });
+
+ }
+ 
+ //HONDURAS
+			function addHondurasMarkers(){
+	map.setCenter(new google.maps.LatLng(14.204621, -88.161337));
+	//Declaracion de las variables con ubicaciones de las zonas arqueologicas			
+  var Copan = new google.maps.LatLng(15.147703, -88.832745);
+  var Rastrojon = new google.maps.LatLng(14.856471, -89.131632);
+  var ElPuente = new google.maps.LatLng(13.280552, -87.128406);
+  
+  
+  //Declaracion de los marcadores de las ubicaciones
+  var markerCopan = new google.maps.Marker({
+					position: Copan,
+					title: "Copan",
+					icon: 'style/piramide.png'
+				});		
+  var markerRastrojon = new google.maps.Marker({
+					position: Rastrojon,
+					title: "Rastrojon",
+					icon: 'style/piramide.png'
+				});			
+ var markerElPuente = new google.maps.Marker({
+					position: ElPuente,
+					title: "ElPuente",
+					icon: 'style/piramide.png'
+				});
+
+	//Asignacion de los marcadores al mapa
+				markers.push(markerCopan);
+				markers.push(markerRastrojon);
+				markers.push(markerElPuente);
+				
+	//Declaracion de las variables para las ventanas de informacion
+  var infowindowCopan = new google.maps.InfoWindow({
+  content:"Copan"
+  });
+  var infowindowRastrojon = new google.maps.InfoWindow({
+  content:"Rastrojon"
+  });
+  var infowindowElPuente = new google.maps.InfoWindow({
+  content:"El Puente"
+  });
+  
+  //Eventos para cada marcador
+ google.maps.event.addListener(markerCopan, 'click', function() {
+  infowindowCopan.open(map,markerCopan);
+  });
+  google.maps.event.addListener(markerRastrojon, 'click', function() {
+  infowindowRastrojon.open(map,markerRastrojon);
+  });
+  google.maps.event.addListener(markerElPuente, 'click', function() {
+  infowindowElPuente.open(map,markerElPuente);
+  });
+
+ } 
+ 
+  //EL SALVADOR
+			function addSalvadorMarkers(){	
+			map.setCenter(new google.maps.LatLng(13.984621, -89.361337));
+	//Declaracion de las variables con ubicaciones de las zonas arqueologicas			
+  var SanAndres = new google.maps.LatLng(13.801200, -89.388486);
+  var Cihuatan = new google.maps.LatLng(13.980913, -89.165101);
+  var CasaBlanca = new google.maps.LatLng(13.988778, -89.671661);
+  
+  
+  //Declaracion de los marcadores de las ubicaciones
+  var markerSanAndres = new google.maps.Marker({
+					position: SanAndres,
+					title: "San Andres",
+					icon: 'style/piramide.png'
+				});		
+  var markerCihuatan = new google.maps.Marker({
+					position: Cihuatan,
+					title: "Cihuatan",
+					icon: 'style/piramide.png'
+				});			
+ var markerCasaBlanca = new google.maps.Marker({
+					position: CasaBlanca,
+					title: "Casa Blanca",
+					icon: 'style/piramide.png'
+				});
+
+	//Asignacion de los marcadores al mapa
+				markers.push(markerSanAndres);
+				markers.push(markerCihuatan);
+				markers.push(markerCasaBlanca);
+				
+	//Declaracion de las variables para las ventanas de informacion
+  var infowindowSanAndres = new google.maps.InfoWindow({
+  content:"San Andres"
+  });
+  var infowindowCihuatan = new google.maps.InfoWindow({
+  content:"Cihuatan"
+  });
+  var infowindowCasaBlanca = new google.maps.InfoWindow({
+  content:"Casa Blanca"
+  });
+  
+  //Eventos para cada marcador
+ google.maps.event.addListener(markerSanAndres, 'click', function() {
+  infowindowSanAndres.open(map,markerSanAndres);
+  });
+  google.maps.event.addListener(markerCihuatan, 'click', function() {
+  infowindowCihuatan.open(map,markerCihuatan);
+  });
+  google.maps.event.addListener(markerCasaBlanca, 'click', function() {
+  infowindowCasaBlanca.open(map,markerCasaBlanca);
+  });
+
+ } 
+
+ </script>
+  
+  
+  
+  </head>
+
+  
+  
+<body>
+  <div id="main">
+  <!--Aqui empieza el encabezado-->
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">Ubicaciones<span class="logo_colour">Geogr&aacute;ficas</span></a></h1>
+          
+	
+        </div>
+      </div>
+      
+    </div>
+	<!--Aqui empieza el encabezado-->
+	
+	<!--Aqui esta el contenido de la pagina-->
+    
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Yucatan</a></li>
+    <li><a href="#tabs-2">Campeche</a></li>
+    <li><a href="#tabs-3">Quintana Roo</a></li>
+	<li><a href="#tabs-4">Chiapas</a></li>
+	<li><a href="#tabs-5">Tabasco</a></li>
+	<li><a href="#tabs-6">Belice</a></li>
+	<li><a href="#tabs-7">Guatemala</a></li>
+	<li><a href="#tabs-8">Honduras</a></li>
+	<li><a href="#tabs-9">El Salvador</a></li>
+  </ul>
+  
+  <!--YUCATAN-->
+  <div id="tabs-1">
+    <h2>Yucatan</h2>
+	<p align="justify">El estado de Yucatán se localiza en el sureste de México y en el norte de la península de Yucatán. Se encuentra limitado al norte por el golfo de México, al sureste por el estado de Quintana Roo y al suroeste por el estado de Campeche.
+Antes de la llegada de los españoles a la península de Yucatán, el nombre de esta región era el Mayab, que en lengua maya (ma' ya'ab), se traduce como unos pocos. Fue una región muy importante para la civilización maya, especialmente durante el denominado período posclásico, aunque los asentamientos mayas más remotos en la región se estima que datan del siglo III d. C. Hacia el siglo V, los pobladores empezaron a trasladarse hacia el poniente de la península, fundando, entre otras ciudades, Chichén Itzá, Izamal, Motul, Ek Balam e Ichcaanzihóo (también llamada T'Hó), actualmente Mérida, capital del estado actual.
+</p>
+<p align="justify">Muchas de las ciudades mayas de la región peninsular subsistieron después del colapso de las ciudades de la región maya original y algunas de ellas seguían habitadas a la llegada de los españoles. </p>
+   
+  </div>
+  
+  <!--CAMPECHE-->
+  <div id="tabs-2">
+    <h2>Campeche</h2>
+    <p align="justify">El estado de Campeche cuenta con importantes asentamientos que dan fe del imperio forjado por la cultura maya, una de las más grandes y antiguas de América.</p>
+  </div>
+  
+   <!--QUINTANA ROO-->
+  <div id="tabs-3">
+    <h2>Quintana Roo</h2>
+    <p align="justify">En Quintana Roo los mayas dejaron testimonio de su grandeza como civilización primogenia del mundo, ubicamos en Coba una fecha jeroglifica que supera cualquier percepcion del tiempo realizada por alguna otra civilizacion antigua, en Tulum reconocemos una arquitectura que esta ligada a la naturaleza.</p>
+<p align="justify">En el sur de Quintana Roo se localizan algunas de las ciudades mas antiguas del mundo Maya, porque tanto por mar como por tierra esa zona fue un lugar de transito comercial a gran escala desde los origenes de la civilizacion Maya</p>	
+ 
+  </div>
+  
+   <!--CHIAPAS-->
+<div id="tabs-4">
+    <h2>Chiapas</h2>
+    <p align="justify">Chiapas es verde desde la montaña hasta el mar. Aquí han vivido siempre los mayas y aquí se encuentra su historia, aquí convive su herencia viva de los mayas con la influencia de la colonia. La mezcla de ambas culturas se vive en comunidades como San Juan Chamula o Chiapa del Corzo.</p>
+<p align="justify">El esplendor de los yacimientos mayas de Palenque, Bonampak, Yaxchilán, Izapa o Toniná rivaliza con la potencia monumental de las ciudades coloniales de Chiapa de Corzo, San Cristóbal de las Casas y Comitán de Domínguez. Estas ciudades, así como Tuxtla Gutiérrez, la capital del estado, Tapachula y Palenque ofrecen excelentes infraestructuras hoteleras para grupos que buscan nuevas vivencias o espacios singulares para sus eventos.</p> 
+  
+  </div>
+
+   <!--TABASCO-->
+  <div id="tabs-5">
+    <h2>Tabasco</h2>
+    <p align="justify">Durante el período Clásico, los mayas de Tabasco ocuparon parte de las tierras bajas de la llanura costera hasta el río Mezcalapa y aprovecharon la diversidad ambiental de la región para cultivar una gran cantidad de frutos, así como para establecer una extensa red de comunicación fluvial, que los convertiría en los grandes comerciantes de la región Mesoamericana.</p>
+<p align="justify">En esta era, lograron construir grandes capitales de señoríos que lucharon intensamente tanto por su autonomía e independencia, como por obtener mayores tributos y poder, contra otras ciudades rivales tanto de la cuenca del Usumacinta, como con la de El Petén, conflicto que a la postre los llevaría a la desintegración.</p>
+<p align="justify">Durante el Posclásico, Tabasco se caracterizó por una organización más simple, estructurada regionalmente en pequeñas provincias que, en el siglo XVI, enfrentaron a poderío de las armas de fuego de los conquistadores españoles</p> 
+
+ </div>
+
+  <!--BELICE-->
+  <div id="tabs-6">
+    <h2>Belice</h2>
+    <p align="justify">Es un país soberano de América ubicado en el extremo noreste de Centroamérica. La capital es la ciudad de Belmopán y la ciudad más poblada es la Ciudad de Belice.
+</p>
+<p align="justify">Limita al norte con México y al oeste y sur con Guatemala. Belice fue parte del Imperio Maya.
+</p> 
+
+  </div>
+
+   <!--GUATEMALA-->
+  <div id="tabs-7">
+    <h2>Guatemala</h2>
+    <p align="justify">Es un país situado en América Central, en su extremo noroccidental, con una amplia cultura autóctona producto de la herencia maya y la influencia castellana durante la época colonial. Dentro de sus límites territoriales se desarrollaron varias culturas. Entre ellas la Civilización Maya que fue notable por lograr un complejo desarrollo social.
+</p> 
+ 
+  </div>
+
+   <!--HONDURAS-->
+  <div id="tabs-8">
+    <h2>Honduras</h2>
+    <p align="justify">La Honduras Pre-colombina fue poblada por una mezcla compleja de pueblos indígenas representando una amplia variedad de orígenes culturales y lingüísticos. Entre estos grupos se destacan los mayas, los cuales estaban relacionados con los mayas de Yucatán y Guatemala. Los mayas se extendieron a través del valle del Río Motagua, centrando su control en el principal centro ceremonial de Copán, cerca de la actual ciudad de Santa Rosa de Copán. Por tres siglos y medio, los mayas desarrollaron la ciudad, convirtiéndolo en uno de los principales centros de su cultura.1 Causas desconocidas hasta hoy, provocaron el abandono y la destrucción de Copán y otras ciudades mayas, que en la época de la conquista española ya no eran más que ruinas
+</p> 
+  
+  </div>
+
+   <!--EL SALVADOR-->
+  <div id="tabs-9">
+    <h2>El Salvador</h2>
+    <p align="justify">Entre volcanes y cafetales aparecen los restos de la civilización maya, que floreció en El Salvador comerciando con todos los grandes imperios prehispánicos de Mesoamérica.
+</p><p align="justify">
+Además de imponentes centros ceremoniales, El Salvador propone una inusual mirada a la vida cotidiana de los antiguos mayas, oculta durante siglos. Como en la antigua Pompeya, el tiempo quedó sepultado en la Joya de Cerén bajo las cenizas de una violenta erupción volcánica y hoy una fascinante excavación nos permite asomarnos como en una ventana a épocas pasadas.</p> 
+  
+  </div>
+
+  </div>
+	<div id="mapaYucatan" style="width:600px; height:600px"  ></div>
+   
+
+<!--Aquí empieza el pie de página-->
+   
+    <div id="footer">
+
+      <a href="admin">ADMINISTRADOR</a> | <a href="index.html">Traductor</a> 
+    </div>
+  </div>
+  <!--Aqui termina el pie de página-->
+</body>
+</html>
