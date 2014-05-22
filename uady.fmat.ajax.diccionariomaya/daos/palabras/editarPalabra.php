@@ -1,5 +1,6 @@
 <?php
-	function subirAudio($archivo_audio, $maya_id, $audio){
+	 header("Content-Type: text/html; charset=UTF-8");
+         function subirAudio($archivo_audio, $maya_id, $audio){
 		
 		if(isset($archivo_audio) && !$archivo_audio['error']){
 			$archivos_permitidos = array("audio/mpeg","audio/mp3");

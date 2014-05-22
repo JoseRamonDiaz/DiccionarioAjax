@@ -1,5 +1,6 @@
 <?php
-	include '../conexion.php';
+	header("Content-Type: text/html; charset=UTF-8");
+        include '../conexion.php';
 	
 	$palabra = $_GET['palabra'];
 	$idioma = $_GET['idioma'];

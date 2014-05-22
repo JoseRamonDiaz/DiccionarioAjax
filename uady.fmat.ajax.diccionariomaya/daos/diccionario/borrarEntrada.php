@@ -1,5 +1,6 @@
 <?php
-	include '../conexion.php';
+	header("Content-Type: text/html; charset=UTF-8");
+        include '../conexion.php';
 	
 	$espaniol_id = $_GET['id_espaniol'];
 	$maya_id = $_GET['id_maya'];
