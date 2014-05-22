@@ -32,7 +32,7 @@
         }
         
     } catch (Exception $e) {
-    
+        
         echo "Ocurrió un error. Los datos no se modificaron.";    
     }
    

@@ -1,4 +1,4 @@
-﻿var sIdiomaDiccionario;
+var sIdiomaDiccionario;
 var nPagina;
 var nPalabras=15;
 
@@ -92,7 +92,7 @@ function llenarSelectEsp(respuesta){
 	if(aRespuesta[0]){
 		aPalabras = aRespuesta[1];
 
-		$( "#sel_palabraes" ).html("<option value=\"-1\" selected>Palabra español</option>");
+		$( "#sel_palabraes" ).html("<option value=\"-1\" selected>Palabra espa&ntilde;ol</option>");
 	
 		for(i=0; i<aPalabras.length; i++){
 			$( "#sel_palabraes" ).append("<option value=\""+aPalabras[i]['espaniol_id']+"\">"+aPalabras[i]['texto_espaniol']+"</option>");

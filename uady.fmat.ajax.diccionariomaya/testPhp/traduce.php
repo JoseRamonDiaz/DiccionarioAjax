@@ -17,7 +17,7 @@
     echo json_encode($respuesta);
     
     function obtenerRespuesta($palabraATraducir, $tipoTraduccion){
-        include 'conexion.php';
+        include '../daos/conexion.php';
         $link = mysqli_connect($host, $user, $password, $database);
         $query = "";
         if($tipoTraduccion == "esma")

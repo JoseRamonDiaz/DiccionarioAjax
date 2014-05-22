@@ -1,6 +1,6 @@
 <?php
     function resultadosParecidos($palabraParcial, $tipoTraduccion) {
-    include 'conexion.php';
+    include '../daos/conexion.php';
     $link = mysqli_connect($host, $user, $password, $database);
 
     $query = "";

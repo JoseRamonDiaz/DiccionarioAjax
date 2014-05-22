@@ -1,7 +1,8 @@
-﻿<?php
-	//Con esto se valida que se haya iniciado sesion
-	include_once "../daos/daoAdministrador.php";
-	validarSesion();
+<?php
+
+    //Con esto se valida que se haya iniciado sesion
+    include_once "../daos/daoAdministrador.php";
+    validarSesion();
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,7 +55,7 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 
-                <a class="navbar-brand" href="../index.html">Diccionario Maya</a>
+                <a class="navbar-brand" target="_blank" href="../index.html">Diccionario Maya</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -65,13 +66,10 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
-                        </li>
+                        <li><a href="perfil.php"><i class="fa fa-user fa-fw"></i> Perfil</a></li>
+                        
                         <li class="divider"></li>
-                        <li><a href="index.html"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-                        </li>
+                        <li><a href="cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -82,33 +80,23 @@
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Buscar...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
                         
+                        <li>
+                            <a href="estadisticaadmin.php"><i class="fa fa-wrench fa-fw"></i> Estad&iacute;sticas</a>
+                        </li>
                         <li>
                             <a href="categoria.php"><i class="fa fa-wrench fa-fw"></i> Categor&iacute;a</a>
                         </li>
                         <li>
-                            <a href="maya.php"><i class="fa fa-wrench fa-fw"></i> Palabra Maya</a>
+                            <a href="#.php"><i class="fa fa-wrench fa-fw"></i> Palabra Maya</a>
                         </li>
                         <li>
                             <a href="espaniol.php"><i class="fa fa-wrench fa-fw"></i> Palabra Espa&ntilde;ol</a>
                         </li>
-						<li>
+			<li>
                             <a href="diccionario.php"><i class="fa fa-wrench fa-fw"></i> Diccionario</a>
                         </li>
-						<li>
-                            <a href="estadisticaadmin.php"><i class="fa fa-wrench fa-fw"></i> Estadísticas</a>
-                        </li>
+			
                     </ul>
                     <!-- /#side-menu -->
                 </div>
@@ -151,7 +139,7 @@
 									<?php
 										require_once '../daos/daoCategoria.php';
 
-										//listar todas las categorías
+										//listar todas las categorias
 										$lista_categorias = obtenerTodasCategorias();
 									
 										foreach ($lista_categorias as $record) {	
@@ -180,7 +168,7 @@
 									<?php
 										require_once '../daos/daoCategoria.php';
 
-										//listar todas las categorías
+										//listar todas las categorias
 										$lista_categorias = obtenerTodasCategorias();
 									
 										foreach ($lista_categorias as $record) {	

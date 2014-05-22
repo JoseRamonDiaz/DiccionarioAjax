@@ -1,7 +1,8 @@
-﻿<?php
-	//Con esto se valida que se haya iniciado sesion
-	include_once "../daos/daoAdministrador.php";
-	validarSesion();
+<?php
+
+    //Con esto se valida que se haya iniciado sesion
+    include_once "../daos/daoAdministrador.php";
+    validarSesion();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -35,7 +36,7 @@
     <!-- SB Admin Scripts - Include with every page -->
     <script src="../js/sb-admin.js"></script>
     
-    <!-- Gestión de palabras en español-->
+    <!-- Gesti�n de palabras en espa�ol-->
 
     <!-- Admin - Include with every page -->
     <link href="../css/sb-admin.css" rel="stylesheet">
@@ -52,7 +53,7 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 
-                <a class="navbar-brand" href="../index.html">Diccionario Maya</a>
+                <a class="navbar-brand" target="_blank" href="../index.html">Diccionario Maya</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -63,13 +64,10 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
-                        </li>
+                        <li><a href="perfil.php"><i class="fa fa-user fa-fw"></i> Perfil</a></li>
+                        
                         <li class="divider"></li>
-                        <li><a href="index.html"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-                        </li>
+                        <li><a href="cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -80,18 +78,10 @@
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Buscar...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
                         
+                        <li>
+                            <a href="estadisticaadmin.php"><i class="fa fa-wrench fa-fw"></i> Estad&iacute;sticas</a>
+                        </li>
                         <li>
                             <a href="categoria.php"><i class="fa fa-wrench fa-fw"></i> Categor&iacute;a</a>
                         </li>
@@ -99,15 +89,12 @@
                             <a href="maya.php"><i class="fa fa-wrench fa-fw"></i> Palabra Maya</a>
                         </li>
                         <li>
-                            <a href="espaniol.php"><i class="fa fa-wrench fa-fw"></i> Palabra Espa&ntilde;ol</a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Palabra Espa&ntilde;ol</a>
                         </li>
-						
-                        <li>
+			<li>
                             <a href="diccionario.php"><i class="fa fa-wrench fa-fw"></i> Diccionario</a>
                         </li>
-						<li>
-                            <a href="estadisticaadmin.php"><i class="fa fa-wrench fa-fw"></i> Estadísticas</a>
-                        </li>
+			
                     </ul>
                     <!-- /#side-menu -->
                 </div>
@@ -119,7 +106,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Palabras en español</h1>	
+                    <h1 class="page-header">Palabras en espa&ntilde;ol</h1>	
 					
 					<div id="admin_palabras">
 						<ul>
@@ -132,7 +119,7 @@
 							<div id="busqueda">
 								<input type="text" size="50" maxlength="50" class="inputText ui-autocomplete-input" height="40" width="60" name="word" id="word" autocomplete="off">
 				
-								<input id="buscar" name="Buscar" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="../style/search.png" alt="Search" title="Search" onClick="consultarPalabra()">
+								<input id="buscar" name="Buscar" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="../style/search.png" alt="Search" title="Search" onClick="consultarPalabra();">
 							</div>
 							</br>
 							
@@ -146,7 +133,7 @@
                                                             <div id="errorDiv"></div>
 							<div style="margin:10px">
 								<select id="cmb_categoria" name="cmb_categoria">
-									<option value="-1" selected>Categoría</option>
+									<option value="-1" selected>Categor&iacute;a</option>
 									<?php
 										require_once '../daos/daoCategoria.php';
 
@@ -160,7 +147,7 @@
 								</select>
 							</div>
 							
-							<div style="margin:10px"><input type="text" name="palabraes" class="input-xlarge" placeholder="Palabra español" size="30" id="palabra1"> <span id="palabra1Error" class="errorFeedback errorSpan">La palabra es incorrecta</span></div>
+							<div style="margin:10px"><input type="text" name="palabraes" class="input-xlarge" placeholder="Palabra espa&ntilde;ol" size="30" id="palabra1"> <span id="palabra1Error" class="errorFeedback errorSpan">La palabra es incorrecta</span></div>
 							
 							<input type="button" name="btn_guardar" id="btn_guardar" value="Guardar" style="margin:10px; padding:5px; position:relative; left:50px">
 							
@@ -173,11 +160,11 @@
                                                             <div id="errorDiv"></div>
 							<div style="margin:10px">
 								<select id="cmb_categoria" name="cmb_categoria">
-									<option value="-1" selected>Categoría</option>
+									<option value="-1" selected>Categor&iacute;a</option>
 									<?php
 										require_once '../daos/daoCategoria.php';
 
-										//listar todas las categorías
+										//listar todas las categorias
 										$lista_categorias = obtenerTodasCategorias();
 									
 										foreach ($lista_categorias as $record) {	
@@ -187,7 +174,7 @@
 								</select>
 							</div>
 							
-							<div style="margin:10px"><input type="text" name="palabra" id="palabra" class="input-xlarge" placeholder="Palabra español" size="30"> <span id="palabraError" class="errorFeedback errorSpan">La palabra es incorrecta</span></div>
+							<div style="margin:10px"><input type="text" name="palabra" id="palabra" class="input-xlarge" placeholder="Palabra espa&ntilde;ol" size="30"> <span id="palabraError" class="errorFeedback errorSpan">La palabra es incorrecta</span></div>
 							
 							<input type="button" name="btn_guardarEdicion" id="btn_guardarEdicion" value="Guardar" style="margin:10px; padding:5px; position:relative; left:50px">
 							<input type="button" name="btn_cancelarEdicion" id="btn_cancelarEdicion" value="Cancelar" style="margin:10px; padding:5px; position:relative; left:50px">

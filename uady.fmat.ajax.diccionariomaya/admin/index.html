@@ -49,7 +49,7 @@
             
             var divStatus = document.getElementById("divStatus");
             if (sMessage === "exito") {
-                location.href="categoria.php";
+                location.href="estadisticaadmin.php";
             } else {
                 divStatus.innerHTML = sMessage;
             }
@@ -93,7 +93,7 @@
 
     </style>
     <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
-
+    <link rel="shorcut icon"  href="../style/diccionario.png" type="image/png">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -112,9 +112,9 @@
                 <input class="input-block-level" placeholder="Nombre de usuario" type="text" name="username" value="">
                 <input class="input-block-level" placeholder="Password" type="password" name="password" value="">
                 <div class="alert-danger" id="divStatus"></div>
-                <label class="checkbox">
+                <!--label class="checkbox">
                     <input name="remember" type="checkbox" checked> Recordarme
-                </label>
+                </label-->
                 <input class="btn btn-large btn-primary" type="submit" value="Ingresar" />
                 <h5><a href="recuperarContrasenia.php">¿Olvidó su contrase&ntilde;a?</a></h5> 
             </form>   

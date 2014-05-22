@@ -1,4 +1,4 @@
-﻿var sIdiomaDiccionario;
+var sIdiomaDiccionario;
 var nPagina;
 var nPalabras=15;
 

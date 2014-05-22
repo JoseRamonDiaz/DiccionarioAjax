@@ -1,4 +1,4 @@
 DiccionarioAjax
 ===============
 
-AplicaciÃ³n web para traducir maya-espaÃ±ol y espaÃ±ol-maya. 
+Aplicación web para traducir maya-español y español-maya. 

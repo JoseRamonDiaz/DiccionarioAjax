@@ -18,10 +18,10 @@
                 
                 if ($exito){
                     // Enviamos por email la nueva contraseña
-                    $remite_nombre = "I.O."; // Tu nombre o el de tu página
-                    $remite_email = "a95002304@alumnos.uady.mx"; // tu correo
+                    $remite_nombre = "Administrador Web";
+                    $remite_email = "nombre@dominio"; // Sustituir por un e-mail válido
                     $asunto = "Recuperación de contraseña"; // Asunto (se puede cambiar)
-                    $mensaje = "Se ha generado una nueva contraseña. La nueva contraseña es: <strong>".$nueva_clave."</strong>.";
+                    $mensaje = "Ha solicitado una nueva contraseña. La nueva contraseña es: <strong>".$nueva_clave."</strong>.";
                     $cabeceras = "From: ".$remite_nombre." <".$remite_email.">\r\n";
                     $cabeceras = $cabeceras."Mime-Version: 1.0\n";
                     $cabeceras = $cabeceras."Content-Type: text/html";
@@ -34,7 +34,7 @@
                     }
                 } else {
                     
-                    echo "no se editó el perfil";
+                    echo "Ocurrió un error.";
                 }
             }else {
                 echo "El usuario con e-mail<strong>".$email."</strong> no está registrado. <a href='javascript:history.back();'>Reintentar</a>";

@@ -1,13 +1,14 @@
-﻿<?php
-	//Con esto se valida que se haya iniciado sesion
-	include_once "../daos/daoAdministrador.php";
-	validarSesion();
+<?php
+
+    //Con esto se valida que se haya iniciado sesion
+    include_once "../daos/daoAdministrador.php";
+    validarSesion();
 ?>
 <!DOCTYPE HTML>
 <html>
     <head>
         <title>Diccionario Maya</title>
-        <meta name="keywords" content="diccionario maya, traductor, traductor maya a español traductor español a maya" />
+        <meta name="keywords" content="diccionario maya, traductor, traductor maya a espa�ol traductor espa�ol a maya" />
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		
         <link rel="shorcut icon"  href="../style/diccionario.png" type="image/png">
@@ -49,10 +50,10 @@
 							nBusquedas.push(aPalabras[i]['num_consultas']);
 						}
 						
-						graficar(nBusquedas, palabras, 'Palabras español', 'graficaEspaniol');
+						graficar(nBusquedas, palabras, 'Palabras espa&tilde;ol', 'graficaEspaniol');
 					}
 					else{
-						$('#graficaEspaniol').html("No se han consultado palabras en español.");
+						$('#graficaEspaniol').html("No se han consultado palabras en espa&ntilde;ol.");
 					}
 				}
 				else if(aRespuesta[0]==false){
@@ -133,7 +134,7 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 
-                <a class="navbar-brand" href="../index.html">Diccionario Maya</a>
+                <a class="navbar-brand" target="_blank" href="../index.html">Diccionario Maya</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -144,13 +145,10 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
-                        </li>
+                        <li><a href="perfil.php"><i class="fa fa-user fa-fw"></i> Perfil</a></li>
+                        
                         <li class="divider"></li>
-                        <li><a href="index.html"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-                        </li>
+                        <li><a href="cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -161,18 +159,10 @@
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Buscar...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
                         
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Estad&iacute;ticas</a>
+                        </li>
                         <li>
                             <a href="categoria.php"><i class="fa fa-wrench fa-fw"></i> Categor&iacute;a</a>
                         </li>
@@ -181,14 +171,11 @@
                         </li>
                         <li>
                             <a href="espaniol.php"><i class="fa fa-wrench fa-fw"></i> Palabra Espa&ntilde;ol</a>
-                        </li>
-						
+                        </li>			
                         <li>
                             <a href="diccionario.php"><i class="fa fa-wrench fa-fw"></i> Diccionario</a>
                         </li>
-						<li>
-                            <a href="estadisticaadmin.php"><i class="fa fa-wrench fa-fw"></i> Estadísticas</a>
-                        </li>
+			
                     </ul>
                     <!-- /#side-menu -->
                 </div>
@@ -200,14 +187,14 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-					<h1 class="page-header">Estadísticas</h1>
+					<h1 class="page-header">Estad&iacute;sticas</h1>
 					<div id="Content" style="text-align:center; width:700px">
 						<div id="GraficaEsContainer" style="margin:100px;">
-							<h1>Palabras más consultadas en español</h1>
+                                                    <h1>Palabras m&aacute;s consultadas en espa&ntilde;ol</h1>
 							<div id="graficaEspaniol" style="height:400px; width:600px; text-align:center; font-size:150%"></div>
 						</div>
 						<div id="GraficaMaContainer" style="margin:100px;">
-							<h1>Palabras más consultadas en maya</h1>
+                                                    <h1>Palabras m&aacute;s consultadas en maya</h1>
 							<div id="graficaMaya" style="height:400px;width:600px; text-align:center; font-size:150%"></div>
 						</div>
 					</div>

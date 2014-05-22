@@ -17,6 +17,7 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="shorcut icon"  href="../style/diccionario.png" type="image/png">
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     
@@ -111,7 +112,7 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 
-                <a class="navbar-brand" href="../index.html">Diccionario Maya</a>
+                <a class="navbar-brand" target="_blank" href="../index.html">Diccionario Maya</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -122,13 +123,10 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                        </li>
-                        <!--li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuraci&oacute;n</a>
-                        </li-->
+                        <li><a href="#.php"><i class="fa fa-user fa-fw"></i> Perfil</a></li>
+                        
                         <li class="divider"></li>
-                        <li><a href="cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-                        </li>
+                        <li><a href="cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -139,20 +137,12 @@
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Buscar...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Categor&iacute;a</a>
+                            <a href="estadisticaadmin.php"><i class="fa fa-wrench fa-fw"></i> Estad&iacute;sticas</a>
+                        </li>
+                        <li>
+                            <a href="categoria.php"><i class="fa fa-wrench fa-fw"></i> Categor&iacute;a</a>
                         </li>
                         <li>
                             <a href="maya.php"><i class="fa fa-wrench fa-fw"></i> Palabra Maya</a>

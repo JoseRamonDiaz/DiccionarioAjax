@@ -1,4 +1,8 @@
 <?php
+/*
+ * Este archivo no se está usando en el proyecto
+ */
+
 include 'conexion.php';
 require_once '../modelos/vocabularioMaya.php';
 
