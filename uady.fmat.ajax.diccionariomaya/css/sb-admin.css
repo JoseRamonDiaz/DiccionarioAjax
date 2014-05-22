@@ -313,3 +313,15 @@ table.dataTable thead .sorting:after {
 .show-grid {
     margin: 15px 0;
 }
+
+.errorClass{
+    background-color: #cc6666;
+}
+
+#errorDiv{
+    color: red;
+}
+
+.errorFeedback{
+    visibility: hidden;
+}

@@ -25,6 +25,8 @@
     <script src="../js/jquery-1.10.2.js"></script>
 	<script src="../js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
 	<script src="../js/peticiones-admin.js"></script>
+        <script src="../js/validaciones.js"></script>
+        <script src="../js/validarPalabra.js"></script>
 	
 	    <!-- Core Scripts - Include with every page -->
     <script src="../js/bootstrap.min.js"></script>
@@ -34,6 +36,7 @@
 
     <!-- SB Admin Scripts - Include with every page -->
     <script src="../js/sb-admin.js"></script>
+    
     
     <!-- Gestión de palabras -->
 
@@ -138,6 +141,7 @@
 						
 						<div id="agregar_palabra">
 							<form id="form_agregar">
+                                                            <div id="errorDiv"></div>
 							<div style="margin:10px">
 								<select id="cmb_categoria" name="cmb_categoria">
 									<option value="-1" selected>Categoría</option>
@@ -154,7 +158,7 @@
 								</select>
 							</div>
 								
-							<div style="margin:10px"><input type="text" name="palabrama" class="input-xlarge" placeholder="Palabra maya" size="30"></div>
+							<div style="margin:10px"><input type="text" name="palabrama" class="input-xlarge" placeholder="Palabra maya" size="30" id="palabra1"><span id="palabra1Error" class="errorFeedback errorSpan">La palabra en maya es incorrecta</span></div>
 							
 							<input type="file" name="f_audio" id="f_audio" style="margin:10px">
 							
@@ -166,6 +170,7 @@
 						
 						<div id="editar_palabra">
 							<form id="form_editar">
+                                                             <div id="errorDiv"></div>
 							<div style="margin:10px">
 								<select id="cmb_categoria" name="cmb_categoria">
 									<option value="-1" selected>Categoría</option>
@@ -182,7 +187,7 @@
 								</select>
 							</div>
 								
-							<div style="margin:10px"><input type="text" name="palabra" id="palabra" class="input-xlarge" placeholder="Palabra maya" size="30"></div>
+							<div style="margin:10px"><input type="text" name="palabra" id="palabra" class="input-xlarge" placeholder="Palabra maya" size="30"> <span id="palabraError" class="errorFeedback errorSpan">La palabra en maya es incorrecta</span></div>
 							
 							<div style="margin:10px"><input type="text" name="audio" id="audio" placeholder="Audio maya" size="40" readonly></div>
 							

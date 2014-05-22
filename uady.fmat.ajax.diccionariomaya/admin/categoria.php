@@ -19,8 +19,10 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../js/validaciones.js"></script>
+    <script src="../js/validarCategoria.js"></script>
     
-    <!-- Gestión de categorías -->
+    <!-- Gestiï¿½n de categorï¿½as -->
 
     <!-- Admin - Include with every page -->
     <link href="../css/sb-admin.css" rel="stylesheet">
@@ -39,7 +41,7 @@
             //formulario.onsubmit="guardarCategoria(); return false;";
             //formulario.id = "datos";
            
-            var formulario = "<form action='agregarCategoria.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='guardarCategoria(); return false;' id='datos'></form>";
+            var formulario = "<form action='agregarCategoria.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='guardarCategoria(); return false;' id='datos'></form> <div id='errorDiv'></div>";
             //formulario.innerHTML="<input class='form-control'><p class='help-block'>Example block-level help text here.</p></div> <br/> Abreviatura <input type='text' name='abreviatura' value=''/> <br/> <button type='submit' class='btn btn-default'>Submit Button</button>";  
 
             $('#addCategory').append(formulario);
@@ -47,12 +49,12 @@
             $('#addCategory form').append("<div id='nombre' class='input-group'></div><br>");
 
             //$("#addCategory form #nombre").append("<span class='input-group-addon'>Nombre</span>");
-            $('#addCategory form #nombre').append("<input type='text' name='nombre' class='input-xlarge' placeholder='Nombre' size='30'>");
+            $('#addCategory form #nombre').append("<input type='text' name='nombre' class='input-xlarge' placeholder='Nombre' size='30' id='nombre_input'>"+'<span id="nombre_inputError" class="errorFeedback errorSpan">El nombre es incorrecto</span>');
             
             $('#addCategory form').append("<div id='abrev' class='input-group'></div>");
 
             //$("#addCategory form #abrev").append("<span class='input-group-addon'>Abreviatura</span>");
-            $('#addCategory form #abrev').append("<input type='text' name='abreviatura' class='input-xlarge' placeholder='Abreviatura' size='30'>");
+            $('#addCategory form #abrev').append("<input type='text' name='abreviatura' class='input-xlarge' placeholder='Abreviatura' size='30' id='abreviatura'>"+'<span id="abreviaturaError" class="errorFeedback errorSpan">La abreviatura es incorrecta</span>');
             
             $('#addCategory form').append('<br><input type="submit" id="btnGuardar" value="A&ntilde;adir categor&iacute;a" class="btn btn-primary"/>');
             
@@ -67,6 +69,7 @@
         
         function guardarCategoria(){
             
+            if(validarForm()){
             $('#btnGuardar').attr('disabled', 'true');
             
             var envio = $.post("agregarCategoria.php", $("#datos").serialize());
@@ -85,10 +88,10 @@
             
 
             },"json").fail(function() {
-                alert("Ocurrió un error.");
+                alert("Ocurriï¿½ un error.");
             });
             
-  
+            }
         }
 
         
@@ -109,7 +112,7 @@
                 }
   
             }).fail(function(){
-                alert("Ocurrió un error.");
+                alert("Ocurriï¿½ un error.");
                 $('a').unbind('click', false);
             });
             
@@ -125,7 +128,7 @@
             $('#' + id).empty();
             $('#' + id).append("<td id='tdedit'></td>");
       
-            var formulario = "<form action='editarCategoria.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='editarCategoria("+id+"); return false;' id='datos'></form>";
+            var formulario = "<form action='editarCategoria.php' method='POST' enctype='application/x-www-form-urlencoded' onsubmit='editarCategoria("+id+"); return false;' id='datos'></form>" + "<div id='errorDiv'></div>";
             //formulario.innerHTML="<input class='form-control'><p class='help-block'>Example block-level help text here.</p></div> <br/> Abreviatura <input type='text' name='abreviatura' value=''/> <br/> <button type='submit' class='btn btn-default'>Submit Button</button>";  
 
             $('#tdedit').append(formulario);
@@ -135,12 +138,12 @@
             
             $('#tdedit form').append("<input type='hidden' name='id' value='"+id+"'>");
             //$("#addCategory form #nombre").append("<span class='input-group-addon'>Nombre</span>");
-            $('#tdedit form #nombre').append("<input type='text' name='nombre' class='input-xlarge' value='"+celda1+"' size='30'>");
+            $('#tdedit form #nombre').append("<input type='text' name='nombre' class='input-xlarge' value='"+celda1+"' size='30' id='nombre_input'>"+'<span id="nombre_inputError" class="errorFeedback errorSpan">El nombre es incorrecto</span>');
             
             $('#tdedit form').append("<div id='abrev' class='input-group'></div>");
 
             //$("#addCategory form #abrev").append("<span class='input-group-addon'>Abreviatura</span>");
-            $('#tdedit form #abrev').append("<input type='text' name='abreviatura' class='input-xlarge' value='"+celda2+"' size='30'>");
+            $('#tdedit form #abrev').append("<input type='text' name='abreviatura' class='input-xlarge' value='"+celda2+"' size='30' id='abreviatura'>"+'<span id="abreviaturaError" class="errorFeedback errorSpan">La abreviatura es incorrecta</span>');
             
             $('#tdedit form').append('<br><input type="submit" id="btnEditar" value="Guardar categor&iacute;a" class="btn btn-primary"/>');
             
@@ -151,6 +154,7 @@
         
         function editarCategoria(id){
             
+            if(validarForm()){
             $('#btnEditar').attr('disabled', 'true');
             var envio = $.post("editarCategoria.php", $("#datos").serialize());
             envio.done(function(data){
@@ -168,11 +172,11 @@
             
 
             },"json").fail(function() {
-                alert("Ocurrió un error.");
+                alert("Ocurriï¿½ un error.");
             });
             
             $('a').unbind('click', false);
-            
+            }
         }
 
     </script>
@@ -268,7 +272,7 @@
                     
                         require_once '../daos/daoCategoria.php';
 
-                        //listar todas las categorías
+                        //listar todas las categorï¿½as
                         $lista_categorias = obtenerTodasCategorias();
                                      
                         foreach ($lista_categorias as $record) {

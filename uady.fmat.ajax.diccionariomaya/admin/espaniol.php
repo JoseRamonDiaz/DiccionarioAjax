@@ -41,6 +41,8 @@
     <link href="../css/sb-admin.css" rel="stylesheet">
 	
 	<script>setIdioma("es");</script>
+        <script src="../js/validaciones.js"></script>
+        <script src="../js/validarPalabra.js"></script>
 </head>
 
 <body>
@@ -138,6 +140,7 @@
 						
 						<div id="agregar_palabra">
 							<form id="form_agregar">
+                                                            <div id="errorDiv"></div>
 							<div style="margin:10px">
 								<select id="cmb_categoria" name="cmb_categoria">
 									<option value="-1" selected>Categoría</option>
@@ -154,7 +157,7 @@
 								</select>
 							</div>
 							
-							<div style="margin:10px"><input type="text" name="palabraes" class="input-xlarge" placeholder="Palabra español" size="30"></div>
+							<div style="margin:10px"><input type="text" name="palabraes" class="input-xlarge" placeholder="Palabra español" size="30" id="palabra1"> <span id="palabra1Error" class="errorFeedback errorSpan">La palabra es incorrecta</span></div>
 							
 							<input type="button" name="btn_guardar" id="btn_guardar" value="Guardar" style="margin:10px; padding:5px; position:relative; left:50px">
 							
@@ -164,6 +167,7 @@
 						
 						<div id="editar_palabra">
 							<form id="form_editar">
+                                                            <div id="errorDiv"></div>
 							<div style="margin:10px">
 								<select id="cmb_categoria" name="cmb_categoria">
 									<option value="-1" selected>Categoría</option>
@@ -180,7 +184,7 @@
 								</select>
 							</div>
 							
-							<div style="margin:10px"><input type="text" name="palabra" id="palabra" class="input-xlarge" placeholder="Palabra español" size="30"></div>
+							<div style="margin:10px"><input type="text" name="palabra" id="palabra" class="input-xlarge" placeholder="Palabra español" size="30"> <span id="palabraError" class="errorFeedback errorSpan">La palabra es incorrecta</span></div>
 							
 							<input type="button" name="btn_guardarEdicion" id="btn_guardarEdicion" value="Guardar" style="margin:10px; padding:5px; position:relative; left:50px">
 							<input type="button" name="btn_cancelarEdicion" id="btn_cancelarEdicion" value="Cancelar" style="margin:10px; padding:5px; position:relative; left:50px">

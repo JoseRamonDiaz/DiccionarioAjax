@@ -138,6 +138,7 @@ function mostrarEdicion(respuesta){
 }
 
 function agregarPalabra(){
+    if(validarForm()){
 	fd = new FormData( document.forms["form_agregar"] );
 	
 	$.ajax( {
@@ -156,6 +157,7 @@ function agregarPalabra(){
 			alert(aRespuesta[1]);
 		}
 	} );
+    }
 }
 
 function mostrarMensaje(respuesta){
@@ -181,6 +183,7 @@ function cancelarEdicion(){
 }
 
 function guardarEdicion(){
+    if(validarEdicion()){
 	fd = new FormData( document.forms["form_editar"] );
 	
 	$.ajax( {
@@ -201,4 +204,5 @@ function guardarEdicion(){
 			alert(aRespuesta[1]);
 		}
 	} );
+}
 }
