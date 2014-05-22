@@ -27,7 +27,7 @@
     <link href="../css/sb-admin.css" rel="stylesheet">
 
     <script type="text/javascript">
-
+             
         function crearFormEdicion(id) {
            
             $('a').bind('click', false);
@@ -48,7 +48,7 @@
             
             $('#f form').append("<div id='password' class='input-group'></div><br>");
             $('#f form #password').append("<label>Ingresa el nuevo password</label><br>");
-            $('#f form #password').append("<input type='password' id='pass1' name='password' class='input-xlarge' value='"+celdaPassword+"' size='30'><br>");
+            $('#f form #password').append("<input type='password' id='pass1' name='password' class='input-xlarge' value='"+celdaPassword+"' size='30' onfocus='desactivarGuardar()' onblur='repetirPassword()'><br>");
             $('#f form #password').append("<label>Escribe el password otra vez</label><br>");
             $('#f form #password').append("<input type='password' id='pass2' name='rpassword' class='input-xlarge' value='"+celdaPassword+"' size='30' onblur='validarPassword()'>");
             
@@ -57,7 +57,7 @@
             $('#f form #email').append("<input type='text' name='email' class='input-xlarge' value='"+celdaEmail+"' size='30'>");
             
             
-            $('#f form').append('<input type="submit" id="btnGuardar" value="Guardar" class="btn btn-primary"/>');
+            $('#f form').append('<input type="submit" id="btnGuardar" value="Guardar" class="btn btn-primary" />');
             
             $('#f form').append('<a href="javascript:cancelar();" class="add"><i class="fa fa-minus fa-fw"></i>Cancelar</a>');
       
@@ -68,19 +68,38 @@
             var password1= $('#pass1').val();
             var password2= $('#pass2').val();
             
-            console.log(password1);
-            console.log(password2);
+            if (password1 !== password2) {
+                alert("Las contrase&ntilde;as no coinciden.");
+                $('#btnGuardar').attr('disabled', true);
+                $('#pass1').focus();
+                
+            } else {
+                $('#btnGuardar').attr('disabled', false);
+            }
+            
+        }
+        
+        function desactivarGuardar(){
+            $('#btnGuardar').attr('disabled', true); 
+        }
+        
+        function repetirPassword(){
+            $('#btnGuardar').attr('disabled', true);
+            $('#pass2').focus();
+            $('#btnGuardar').attr('disabled', false);
         }
     
         function cancelar(){
 
             $('form').remove();
+            $('a').unbind('click', false);
             
         }
         
         function editarPerfil(){
-            
-            $('#btnGuardar').attr('disabled', 'true');
+          
+          
+            $('#btnGuardar').attr('disabled', true);
             var envio = $.post("editarPerfil.php", $("#datos").serialize());
             envio.done(function(data){
 
@@ -107,8 +126,7 @@
             });
             
             $('a').unbind('click', false);
-            
-        }
+          } 
         
     </script>
 

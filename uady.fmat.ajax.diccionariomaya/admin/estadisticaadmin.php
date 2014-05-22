@@ -49,7 +49,7 @@
 							nBusquedas.push(aPalabras[i]['num_consultas']);
 						}
 						
-						graficar(nBusquedas, palabras, 'Palabras espa&tilde;ol', 'graficaEspaniol');
+						graficar(nBusquedas, palabras, 'Palabras espa&ntilde;ol', 'graficaEspaniol');
 					}
 					else{
 						$('#graficaEspaniol').html("No se han consultado palabras en espa&ntilde;ol.");
